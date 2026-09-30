@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css\globals.css">
+    <link rel="stylesheet" href="css\login.css">
+    <link rel="stylesheet" href="css\forms.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <title>Iniciar sesión - Todo Juegos</title>
+
+    
+</head>
+
+<body class="background-body">
+
+    <main class="auth-page">
+
+        <div class="login-form">
+
+            <h1>Iniciar sesión</h1>
+
+            <form id="login-form" action="home.html">
+
+                <label for="email" class="text-secondary">
+                    Email
+                </label>
+                <input type="email" placeholder="Email" name="email" id="email">
+
+                <label for="password" class="text-secondary">
+                    Contraseña
+                </label>
+                <input type="password" placeholder="Contraseña" name="password" id="password" required>
+
+                <a href="#" class="forgot-password">
+                    ¿Olvidaste tu contraseña?
+                </a>
+
+                <button class="boton-secundario" type="submit">
+                    <h4 class="texto-sin-margen">Ingresar</h4>
+                </button>
+
+            </form>
+
+            <p class="social-title">
+                O ingresar con:
+            </p>
+
+            <div class="social-login">
+
+                <a href="home.html" class="social-link social-login-button">
+                    <img
+                        src="assets/google.svg"
+                        alt="Google"
+                        class="social-icon-img"
+                    >
+                </a>
+
+                <a href="home.html" class="social-link social-login-button">
+                    <img
+                        src="assets/facebook.svg"
+                        alt="Facebook"
+                        class="social-icon-img"
+                    >
+                </a>
+
+            </div>
+
+            <p class="register">
+                ¿No tenés una cuenta?
+                <a href="registro.html">Registrate</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

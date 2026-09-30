@@ -1,0 +1,37 @@
+/* ----------- FORMULARIO DE LOGIN ----------- */
+
+.login-form {
+    width: 475px;
+    padding: 10px 10px;
+    background-color: #282828;
+    border: 1px solid rgba(76, 29, 149, 0.80);
+    border-radius: 16px;
+    color: #ffffff;
+}
+/* Formulario */
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 0 20px;
+}
+
+/* Recuperar contraseña */
+
+.forgot-password {
+    align-self: flex-end;
+
+    margin: 0 0 34px;
+
+    color: #ffffff;
+    font-size: 13px;
+    text-decoration: none;
+
+    transition: color 0.2s ease-in-out;
+}
+
+.forgot-password:hover {
+    color: #A78BFA;
+}
+
+

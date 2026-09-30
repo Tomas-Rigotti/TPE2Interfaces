@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
+    
+    <title>Cyberpunk Peg Solitaire</title>
+
+  <link rel="stylesheet" href="css\globals.css">
+  <link rel="stylesheet" href="css\juego.css">
+  <link rel="stylesheet" href="css\carrusel.css">
+</head>
+
+<body>
+
+  <header class="nav-bar">
+          <div class="logo-con-menu-y">
+              <div class="iconos">
+                  <button class="tabler-icon-menu menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-overlay">
+                      <img class="icono-menu" src="img/header/menu-hamburguesa.svg" alt="" />
+                  </button>
+                  <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+                  <a href="home.html">
+                    <div class="tabler-icon-home"><img class="icono-home" src="img/header/header-home.svg" alt="Inicio" /></div>
+                  </a>
+                  
+              </div>
+              <div class="logo">
+                  <div class="lucide-gamepad"><img class="logo-icono" src="img/header/logo-dibujo.svg" alt="" /></div>
+                  <div class="logo-texto">TODO</div>
+                  <div class="logo-insignia">JUEGOS</div>
+              </div>
+              <div class="perfil">
+                  <button class="perfil-toggle" type="button" aria-label="Abrir menú de perfil" aria-expanded="false" aria-controls="perfil-dropdown">
+                      <img class="perfil-avatar" src="img/header/perfil-header.svg" alt="" />
+                  </button>
+                  <div class="perfil-dropdown" id="perfil-dropdown" hidden>
+                      <div class="perfil-opcion">Mis juegos</div>
+                      <button class="perfil-cerrar-sesion" type="button">Cerrar sesión</button>
+                  </div>
+                  <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+                  <img class="perfil-flecha" src="img/header/carrito-simple.svg" alt="" />
+              </div>
+          </div>
+  </header>
+
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+        <nav class="menu-panel" aria-label="Menú principal">
+            <div class="menu-columna">
+                  <a href="home.html">
+                    <h1>Home</h1>
+                </a>      
+            </div>
+            <div class="menu-columna">
+                <h1>Categorias</h1>
+            </div>
+
+            <div class="menu-columna">
+                <h1>Ofertas</h1>
+            </div>
+
+            <div class="menu-columna">
+                <h1>Mi perfil</h1>
+            </div>
+            <div class="menu-columna">
+              <h1>Seguinos</h1>
+              <div class="menu-social-links">
+                <a href="https://x.com" target="_blank" rel="noopener" aria-label="X">
+                    <img src="assets/x.svg" alt="">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                    <img src="assets/instagram.svg" alt="">
+                </a>
+                  
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                    <img src="assets/facebook.svg" alt="">
+                </a>
+            </div>
+          </div>
+            <div class="menu-columna">
+                <button class="menu-cerrar-sesion" type="button">Cerrar sesión</button>
+            </div>
+        </nav>
+    </div>
+
+
+    
+  <main>
+    <div class="contenedor-padding">
+      <!-- ==================== JUEGO ==================== -->
+
+      <section class="juego-seccion">
+
+          <h1 class="titulo-juego">
+              <u>Cyberpunk Peg Solitaire</u>
+          </h1>
+
+          <div class="breadcrumbs">
+
+                  <a href="home.html" class="breadcrumb-inicio">
+                  <img src="img/juego/breadcrumbs/breadcrumb-home.svg" alt="Inicio">
+              </a>
+
+              <img
+                  class="breadcrumb-flecha"
+                  src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+                  alt=""
+              >
+
+              <a href="#" class="breadcrumb-item">
+                  Categorías
+              </a>
+
+              <img
+                  class="breadcrumb-flecha"
+                  src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+                  alt=""
+              >
+
+              <a href="#" class="breadcrumb-item">
+                  Juegos de mesa
+              </a>
+
+              <img
+                  class="breadcrumb-flecha"
+                  src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+                  alt=""
+              >
+
+              <span class="breadcrumb-actual">
+                  Cyberpunk Peg Solitaire
+              </span>
+
+          </div>
+
+
+          <div class="juego-con-ayuda">
+
+              <div class="juego">
+                  <img
+                      class="juego-fondo"
+                      src="img/juego/placeholder-ejecucion.png"
+                      alt="">
+              </div>
+
+
+              <aside class="ayuda">
+
+                  <div class="ayuda-cabecera">
+                      <h2 class="texto-sin-margen">
+                          ¿Cómo jugar?
+                      </h2>
+
+                      <button
+                          type="button"
+                          class="ayuda-icono"
+                          aria-label="Cerrar ayuda"
+                      >
+                          <img
+                              src="img/juego/instrucciones-juego/help.svg"
+                              alt=""
+                          >
+                      </button>
+                  </div>
+
+                  <div class="ayuda-texto">
+
+                      <p>
+                           <strong><u>Objetivo:</u> </strong> <br>
+                          Elimina la mayor cantidad de fichas hasta dejar solo una en el tablero.
+                      </p>
+
+                      <p>
+                          <u>Mecánica:</u><br>
+                          Con una ficha salta por encima de una adyacente hacia un casillero vacío.
+                      </p>
+
+                      <p>
+                          <u>Dirección:</u><br>
+                          Los saltos pueden ser horizontales o verticales.
+                      </p>
+
+                      <p>
+                          <u>Fin del juego:</u><br>
+                          Cuando no quedan saltos posibles.
+                      </p>
+
+                  </div>
+
+              </aside>
+
+          </div>
+
+
+          <!-- Compartir / valoración -->
+
+          <div class="compartir-valoracion">
+
+              <div class="compartir">
+
+                  <h4 class="compartir-titulo">
+                      Compartir en:
+                  </h4>
+
+                  <p class="compartir-icono" aria-label="Compartir">
+                      <img src="img/juego/compartir/x.svg" alt="">
+                  </p>
+
+                  <p class="compartir-icono" aria-label="Compartir en redes">
+                      <img src="img/juego/compartir/facebook.svg" alt="">
+                  </p>
+
+                  <p class="compartir-icono" aria-label="Compartir">
+                      <img src="img/juego/compartir/mensaje.svg" alt="">
+                  </p>
+
+                  <p class="compartir-icono" aria-label="Compartir">
+                      <img src="img/juego/compartir/email.svg" alt="">
+                  </p>
+
+              </div>
+
+
+              <div class="valoracion">
+
+                  <h4 class="valoracion-pregunta">
+                      ¿Te gusta este juego?
+                  </h4>
+
+                  <div class="reacciones">
+
+                      <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                      </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+      </section>
+
+
+      <!-- ==================== INFORMACIÓN ==================== -->
+
+      <section class="informacion-juego">
+
+          <div class="seccion-cabecera">
+
+              <h2 class="texto-sin-margen">
+                  <u>Información del juego</u> 
+              </h2>
+
+              <img
+                  class="info-icono"
+                  src="img/juego/informacion/informacion.svg"
+                  alt=""
+              >
+
+          </div>
+
+
+          <p class="descripcion-juego">
+              Cyberpunk Peg Solitaire reimagina el clásico Peg Solitaire
+              con un estilo inspirado en el universo futurista de Cyberpunk 2077.
+              ¿Podés lograr que no te ceguen las luces de neón y resolver el
+              tablero, dejando una sola ficha?
+          </p>
+
+
+          <div class="inspiracion">
+            <div class="inspiracion-link">
+                <h3>
+                        ¿De dónde salió la inspiración para este juego?
+                </h3>
+                <a
+                    href="https://www.cyberpunk.net/us/es/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <u>Sitio oficial de Cyberpunk</u>
+                </a>
+            </div>
+            
+            
+              
+              <div class="media-seccion">
+
+                  <h3 class="texto-sin-margen">Adentrate en el universo</h3>
+
+                  
+                  <div class="carrusel">
+
+                      <button class="carrusel-anterior" type="button" aria-label="Anterior">
+                          ←
+                      </button>
+
+                      <div class="carrusel-ventana">
+
+                          <div class="carrusel-contenido">
+
+                            <iframe
+                                class="media-video"
+                                src="https://www.youtube.com/embed/BO8lX3hDU30"
+                                title="Cyberpunk 2077 - Official Gameplay Trailer"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen>
+                            </iframe>
+
+                            <img
+                                class="media-imagen"
+                                src="img/juego/inspiracion/CP77_DBF_rgb-en.jpg"
+                                alt="Cyberpunk 2077"
+                            >
+
+                            <img
+                                class="media-imagen"
+                                src="img/juego/inspiracion/Japantown_1600x900.png"
+                                alt="Japantown"
+                            >
+                            <img
+                                class="media-imagen"
+                                src="img/juego/inspiracion/Cyberpunk2077_5thAnniversary_KV_Vdecal_1600x900.png"
+                                alt="Anniversary Decal"
+                            >
+                            <img
+                                class="media-imagen"
+                                src="img/juego/inspiracion/1600x900_VIKTOR_EN.jpeg"
+                                alt="Viktor"
+                            >
+
+                            <img
+                                class="media-imagen"
+                                src="img/juego/inspiracion/1600x900_ADAM_SMASHER_EN.jpeg"
+                                alt="Adam Smasher"
+                            >
+
+                            <img
+                                class="media-imagen"
+                                src="img/juego/inspiracion/Night_City_1600x900.png"
+                                alt="Night City"
+                            >
+
+
+
+                        </div>
+
+                      </div>
+
+                      <button class="carrusel-siguiente" type="button" aria-label="Siguiente">
+                          →
+                      </button>
+
+                  </div>
+
+                  <div class="carrusel-indicador" role="img" aria-label="Posición 1 de 7"></div>
+
+              </div>
+
+          </div>
+
+      </section>
+
+
+      <!-- ==================== COMUNIDAD ==================== -->
+
+      <section class="comunidad">
+
+          <h2 class="comunidad-titulo">
+              <u>Sección de comunidad</u>
+          </h2>
+
+
+          <!-- Publicar comentario -->
+
+          <div class="publicar-comentario">
+
+              <h3 class="subtitulo-comentario">
+                  Publicar un comentario
+              </h3>
+
+              <div class="comentario-input">
+
+                  <div class="usuario-input">
+
+                      
+                        <img class="avatar"
+                            src="img/juego/comunidad/avatar-placeholder.svg"
+                            alt="Avatar del usuario">
+                      
+                      <div class="input-comentarios">
+                          <span class="comentario-placeholder">
+                              Escribí tu comentario
+                          </span>
+                      </div>
+
+                  </div>
+
+                  <button
+                      type="button"
+                      class="boton-secundario boton-publicar"
+                  >
+                      Publicar
+                  </button>
+
+              </div>
+
+          </div>
+
+
+          <!-- Comentarios -->
+
+          <div class="comentarios">
+
+              <h3 class="subtitulo-comentario">
+                  Comentarios
+              </h3>
+
+
+              <article class="comentario">
+
+                  <div class="comentario-usuario">
+
+                      <img class="avatar"
+                        src="img/juego/comunidad/avatar-placeholder.svg"
+                        alt="Avatar del usuario">
+
+                      <h4>
+                          Usuario1
+                      </h4>
+
+                  </div>
+
+                  <div class="comentario-contenido">
+                      <p>
+                          El Peg Solitaire es el mejor juego de mesa y el
+                          Cyberpunk es el mejor juego, así que el Cyberpunk
+                          Peg Solitaire es lo mejor del mundo.
+                      </p>
+                  </div>
+
+                  <div class="comentario-reacciones">
+
+                      <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                      </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </article>
+
+
+              <article class="comentario">
+
+                  <div class="comentario-usuario">
+
+                      <img class="avatar"
+                        src="img/juego/comunidad/avatar-placeholder.svg"
+                        alt="Avatar del usuario">
+
+                      <h4>
+                          Usuario2
+                      </h4>
+
+                  </div>
+
+                  <div class="comentario-contenido">
+                      <p>
+                          Muy buen juego, es muy entretenido.
+                      </p>
+                  </div>
+
+                  <div class="comentario-reacciones">
+
+                      <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                      </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </article>
+
+
+              <article class="comentario">
+
+                  <div class="comentario-usuario">
+
+                      <img class="avatar"
+                        src="img/juego/comunidad/avatar-placeholder.svg"
+                        alt="Avatar del usuario">
+
+                      <h4>
+                          Usuario3
+                      </h4>
+
+                  </div>
+
+                  <div class="comentario-contenido">
+                      <p>
+                          El juego está bien, pero la mejor experiencia fue
+                          ver el gran diseño de esta página.
+                      </p>
+                  </div>
+
+                  <div class="comentario-reacciones">
+
+                    <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                        <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                        <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                    </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </article>
+
+          </div>
+
+      </section>
+
+
+    </div>
+    </div>
+  </main>
+</body>
+
+
+  <footer>
+        <div class="footer-container">
+            
+            <div class="footer-col">
+                <h4 class="footer-heading">Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="#">Destacados</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Contacto</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nuestras redes</a></li>
+                    <li><a href="#">Envianos tus sugerencias</a></li>
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-link" target="_blank" rel="noopener">
+                            <img src="assets/instagram.svg" alt="Instagram" class="social-icon-img">
+                        </a>
+                        <a href="https://x.com/" class="social-link" target="_blank" rel="noopener">
+                            <img src="assets/x.svg" alt="X/Twitter" class="social-icon-img">
+                        </a>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Soporte</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Código de conducta</a></li>
+                    <li><a href="#">Políticas de privacidad</a></li>
+                </ul>
+            </div>
+
+            
+        </div> 
+        <div class="footer-bottom">
+            <p>Copyright</p>
+            <p>© 2026 TODO JUEGOS. Todos los derechos reservados</p>
+        </div>   
+  </footer>
+<script src="js/carrusel.js"></script>
+<script src="js/reacciones.js"></script>
+<script src="js/menu.js"></script>
+</html>

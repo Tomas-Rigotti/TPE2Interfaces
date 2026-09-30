@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
+    <title>Todo Juegos | Home</title>
+
+    <link rel="stylesheet" href="css\globals.css">
+    <link rel="stylesheet" href="css\home.css">
+    <link rel="stylesheet" href="css\carrusel.css">
+    <link rel="stylesheet" href="css\cards.css">
+    
+</head>
+
+
+
+<body class="is-loading">
+
+    <div class="preloader">
+        <div class="preloader__content">
+            <div class="preloader__spinner"></div>
+            <div class="preloader__counter" id="percent">0</div>
+            <div class="preloader__bar">
+                <div class="preloader__fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <header class="nav-bar">
+          <div class="logo-con-menu-y">
+              <div class="iconos">
+                  <button class="tabler-icon-menu menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-overlay">
+                      <img class="icono-menu" src="img/header/menu-hamburguesa.svg" alt="" />
+                  </button>
+                  <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+                  <a href="home.html">
+                    <div class="tabler-icon-home"><img class="icono-home" src="img/header/header-home.svg" alt="Inicio" /></div>
+                  </a>
+                  
+              </div>
+              <div class="logo">
+                  <div class="lucide-gamepad"><img class="logo-icono" src="img/header/logo-dibujo.svg" alt="" /></div>
+                  <div class="logo-texto">TODO</div>
+                  <div class="logo-insignia">JUEGOS</div>
+              </div>
+              <div class="perfil">
+                  <button class="perfil-toggle" type="button" aria-label="Abrir menú de perfil" aria-expanded="false" aria-controls="perfil-dropdown">
+                      <img class="perfil-avatar" src="img/header/perfil-header.svg" alt="" />
+                  </button>
+                  <div class="perfil-dropdown" id="perfil-dropdown" hidden>
+                      <div class="perfil-opcion">Mis juegos</div>
+                      <button class="perfil-cerrar-sesion" type="button">Cerrar sesión</button>
+                  </div>
+                  <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+                  <img class="perfil-flecha" src="img/header/carrito-simple.svg" alt="" />
+              </div>
+          </div>
+    </header>
+
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+        <nav class="menu-panel" aria-label="Menú principal">
+            <div class="menu-columna">
+                <a href="home.html">
+                    <h1>Home</h1>
+                </a>      
+            </div>
+            <div class="menu-columna">
+                <h1>Categorias</h1>
+            </div>
+
+            <div class="menu-columna">
+                <h1>Ofertas</h1>
+            </div>
+
+            <div class="menu-columna">
+                <h1>Mi perfil</h1>
+            </div>
+            <div class="menu-columna">
+              <h1>Seguinos</h1>
+              <div class="menu-social-links">
+                <a href="https://x.com" target="_blank" rel="noopener" aria-label="X">
+                    <img src="assets/x.svg" alt="">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                    <img src="assets/instagram.svg" alt="">
+                </a>
+                  
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                    <img src="assets/facebook.svg" alt="">
+                </a>
+            </div>
+          </div>
+            <div class="menu-columna">
+                <button class="menu-cerrar-sesion" type="button">Cerrar sesión</button>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+
+        <section class="banner-bienvenida" aria-labelledby="banner-titulo">
+                <div class="banner-bienvenida__contenido">
+                
+                    <h2 id="banner-titulo">Juego destacado</h2>
+                    <h3>
+                        Proba ahora el mejor peg solitaire con temática Cyberpunk 2077
+                    </h3>
+                    <a href="juego.html">
+                        <button type="boton-primario" class="boton-primario">
+                            Jugar ahora
+                        </button>
+                    </a>
+                </div>
+            </section>
+
+
+        <div class="contenedor-padding-home">
+              
+            <section class="carrusel-seccion carrusel-seccion--sugerencias" aria-labelledby="sugerencias-titulo">
+                <h3 id="sugerencias-titulo">Sugerencias para vos</h3>
+                <div class="carrusel">
+                    <button class="carrusel-anterior" type="button" aria-label="Anterior">←</button>
+                    <div class="carrusel-ventana">
+                        <div class="carrusel-contenido">
+                            <div class="card" id="peg-solitaire">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/Cyberpunk peg solitaire.png" alt="Cyberpunk peg solitaire">
+                                    <div class="card-badge">
+                                        <p class="texto-sin-margen">Novedad</p>
+                                    </div>
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Cyberpunk Peg Solitaire</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">Juegos de mesa</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>100%</span>
+                                        </div>
+                                        
+                                    </div>
+                                    <a href="juego.html">
+                                        <button type="boton-primario" class="boton-primario">
+                                            Jugar ahora
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/sims.jfif" alt="The Sims 4">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">The Sims 4</h4>
+                                        <p class="texto-sin-margen">PC - Xbox</p>
+                                        <p class="texto-sin-margen">Simulación</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>75%</span>
+                                        </div>
+                                        <span>$15.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/fallout3.avif" alt="Fallout 3">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Fallout 3</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">RPG</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>80%</span>
+                                        </div>
+                                        <span>$10.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/Jason_and_Lucia_Robbery_With_Logo_landscape.0sjdgaq91u2yn.avif" alt="GTA 6">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Grand Theft Auto 6 Definitive Edition, Full edition</h4>
+                                        <p class="texto-sin-margen">PC - Xbox - Playstation</p>
+                                        <p class="texto-sin-margen">Acción</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>90%</span>
+                                        </div>
+                                        <span>$20.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/ck4.jpg" alt="Crusader Kings 4">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Crusader Kings 4</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">Estrategia</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>83%</span>
+                                        </div>
+                                        <span>$20.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>
+                    <button class="carrusel-siguiente" type="button" aria-label="Siguiente">→</button>
+                    </div>
+                <div class="carrusel-indicador" role="img" aria-label="Posición 1 de 5"></div>
+            </section>
+
+            <section class="carrusel-seccion carrusel-seccion--accion" aria-labelledby="juegos-accion-titulo">
+                <h3 id="juegos-accion-titulo">Juegos destacados de acción</h3>
+                <div class="carrusel">
+                    <button class="carrusel-anterior" type="button" aria-label="Anterior">
+                        ←
+                    </button>
+
+                    <div class="carrusel-ventana">
+                        <div class="carrusel-contenido">
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/ghostoftsushima.avif" alt="Ghost of Tsushima">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Ghost of Tsushima</h4>
+                                        <p class="texto-sin-margen">PC - Xbox - Playstation</p>
+                                        <p class="texto-sin-margen">Acción</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>89%</span>
+                                        </div>
+                                        <span>$14.99</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/mk1.jfif" alt="Mortal Kombat 1">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Mortal Kombat 1</h4>
+                                        <p class="texto-sin-margen">PC - Playstation</p>
+                                        <p class="texto-sin-margen">Acción</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>72%</span>
+                                        </div>
+                                        <span>$10.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/Batman AK.jfif" alt="Batman Arkham Knight">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Batman Arkham Knight</h4>
+                                        <p class="texto-sin-margen">PC - Xbox - Playstation</p>
+                                        <p class="texto-sin-margen">Acción</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>91%</span>
+                                        </div>
+                                        <span>$14.99</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/re4.png" alt="Resident Evil 4 Remake">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Resident Evil 4 Remake</h4>
+                                        <p class="texto-sin-margen">PC - Xbox - Playstation</p>
+                                        <p class="texto-sin-margen">Acción</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>90%</span>
+                                        </div>
+                                        <span>$20.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/devil-may-cry-5-w422eq37u74ho9tm.jpg" alt="Devil May Cry 5">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Devil May Cry 5</h4>
+                                        <p class="texto-sin-margen">PC - Xbox - Playstation</p>
+                                        <p class="texto-sin-margen">Acción</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>85%</span>
+                                        </div>
+                                    </div>
+                                    <button class="boton-primario" type="button">Jugar</button>
+                                </div>
+                            </div>
+
+                            <div class="card"> 
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/sleepingdogs.jfif">
+                                    <div class="card-carrito">
+                                        <img  src="img/cards/carrito.svg">
+                                    </div>
+                                </div>
+                        
+                                <div class="card-info">
+
+                                    <div class="card-texto">
+
+                                        <h4 class="texto-sin-margen">Sleeping Dogs</h4>
+
+                                        <p class="texto-sin-margen">PC</p>
+
+                                        <p class="texto-sin-margen">Acción</p>
+
+                                        <div class="card-valoracion-fila">
+
+                                            <div class="card-valoracion">
+                                                <img class="card-validacion-icono" src="img/cards/card-dislike.svg">
+                                                <span>52%</span>
+
+                                            </div>
+
+                                            <span>$14.99</span>
+                                        </div>
+
+                                </div>
+
+                                <button class="boton-primario" type="button">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <button class="carrusel-siguiente" type="button" aria-label="Siguiente">
+                        →
+                    </button>
+                </div>
+                <div class="carrusel-indicador" role="img" aria-label="Posición 1 de 6"></div>
+            </section>
+
+            <section class="carrusel-seccion carrusel-seccion--estrategia" aria-labelledby="juegos-estrategia-titulo">
+                <h3 id="juegos-estrategia-titulo">Juegos destacados de estrategia</h3>
+                <div class="carrusel">
+                    <button class="carrusel-anterior" type="button" aria-label="Anterior">←</button>
+                                        <div class="carrusel-ventana">
+                        <div class="carrusel-contenido">
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/stellaris.jpg" alt="Stellaris">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Stellaris</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">Estrategia</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>89%</span>
+                                        </div>
+                                        <span>$10.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/ftl.webp" alt="Faster than light">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Faster than light</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">Estrategia</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>91%</span>
+                                        </div>
+                                        <span>$5.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/hearts-of-iron-iv-deutsche-cut-pc-mac-game-steam-germany-cover.jpg" alt="Hearts of Iron IV">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Hearts of Iron IV</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">Estrategia</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>80%</span>
+                                        </div>
+                                        <span>$5.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/civ v.jpg" alt="Civilization V">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Civilization V</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">Estrategia</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>90%</span>
+                                        </div>
+                                        
+                                    </div>
+                                    <button class="boton-primario" type="button">Jugar</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/sc2.jpg" alt="Starcraft 2">
+                                    <div class="card-carrito">
+                                        <img src="img/cards/carrito.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-texto">
+                                        <h4 class="texto-sin-margen">Starcraft 2</h4>
+                                        <p class="texto-sin-margen">PC</p>
+                                        <p class="texto-sin-margen">Estrategia</p>
+                                    </div>
+                                    <div class="card-valoracion-fila">
+                                        <div class="card-valoracion">
+                                            <img class="card-validacion-icono" src="img/cards/card-like.svg" alt="">
+                                            <span>85%</span>
+                                        </div>
+                                        <span>$5.00</span>
+                                    </div>
+                                    <button class="boton-primario" type="button">Comprar</button>
+                                </div>
+                            </div>
+
+                            <div class="card"> 
+                                <div class="card-imagen-contenedor">
+                                    <img src="img/cards/juegos/sleepingdogs.jfif">
+                                    <div class="card-carrito">
+                                        <img  src="img/cards/carrito.svg">
+                                    </div>
+                                </div>
+                        
+                                <div class="card-info">
+
+                                    <div class="card-texto">
+
+                                        <h4 class="texto-sin-margen">Sleeping Dogs</h4>
+
+                                        <p class="texto-sin-margen">PC</p>
+
+                                        <p class="texto-sin-margen">Acción</p>
+
+                                        <div class="card-valoracion-fila">
+
+                                            <div class="card-valoracion">
+                                                <img class="card-validacion-icono" src="img/cards/card-dislike.svg">
+                                                <span>52%</span>
+
+                                            </div>
+
+                                            <span>$14.99</span>
+                                        </div>
+
+                                </div>
+
+                                <button class="boton-primario" type="button">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <button class="carrusel-siguiente" type="button" aria-label="Siguiente">→</button>
+                </div>
+                <div class="carrusel-indicador" role="img" aria-label="Posición 1 de 6"></div>
+            </section>
+
+                
+
+        </div>  
+        </div>        
+    </main>
+   
+    
+
+
+
+    <footer>
+        <div class="footer-container">
+            
+            <div class="footer-col">
+                <h4 class="footer-heading">Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="#">Destacados</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Contacto</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nuestras redes</a></li>
+                    <li><a href="#">Envianos tus sugerencias</a></li>
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-link" target="_blank" rel="noopener">
+                            <img src="assets/instagram.svg" alt="Instagram" class="social-icon-img">
+                        </a>
+                        <a href="https://x.com/" class="social-link" target="_blank" rel="noopener">
+                            <img src="assets/x.svg" alt="X/Twitter" class="social-icon-img">
+                        </a>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Soporte</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Código de conducta</a></li>
+                    <li><a href="#">Políticas de privacidad</a></li>
+                </ul>
+            </div>
+
+            
+        </div> 
+        <div class="footer-bottom">
+            <p>Copyright</p>
+            <p>© 2026 TODO JUEGOS. Todos los derechos reservados</p>
+        </div>   
+    </footer>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/carga.js" defer></script>
+    <script src="js/menu.js" defer></script>
+    <script src="js/carrusel.js" defer></script>
+</body>
+</html>

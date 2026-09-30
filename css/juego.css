@@ -1,0 +1,373 @@
+/* ==================== JUEGO ==================== */
+
+.content-wrapper {
+    width: 100%;
+}
+
+.juego-seccion {
+    --ancho-ayuda: 350px;
+    --separacion-ayuda: 30px;
+    --ancho-juego: calc(100% - var(--ancho-ayuda) - var(--separacion-ayuda));
+}
+
+.titulo-juego {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    -webkit-text-stroke: 1px rgba(167, 139, 250, 1);
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.breadcrumb-inicio {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-inicio img {
+    width: 24px;
+    height: 24px;
+}
+
+.breadcrumb-flecha {
+    width: 16px;
+    height: 16px;
+}
+
+.breadcrumb-item,
+.breadcrumb-actual {
+    font-size: 14px;
+}
+
+.breadcrumb-item {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.breadcrumb-actual {
+    color: #A78BFA;
+}
+
+/* Juego + ayuda */
+
+.juego-con-ayuda {
+    display: flex;
+    align-items: stretch;
+    gap: var(--separacion-ayuda);
+}
+
+/*PLACEHOLDER*/
+.juego-fondo {
+    display: block;
+    width: 100%;
+    max-height: 750px;
+}
+
+.juego {
+    width: var(--ancho-juego);
+    min-height: 650px;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.ayuda {
+    width: 350px;
+    flex-shrink: 0;
+    height: auto;
+    min-height: 650px;
+    box-sizing: border-box;
+    background-color: #282828;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.ayuda-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ayuda-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.ayuda-texto p {
+    color: #FFFFFF;
+    -webkit-text-stroke: 1px rgba(167, 139, 250, 0.25);
+    
+}
+.ayuda-texto p u{
+    text-decoration-line: underline; 
+    text-decoration-color: #A78BFA;  
+}
+
+
+/* Compartir / valoración */
+
+.juego,
+.compartir-valoracion {
+    width: var(--ancho-juego);
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.compartir-valoracion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    height: 80px;
+}
+
+.compartir,
+.valoracion {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.compartir-titulo,
+.valoracion-pregunta {
+    font-size: 14px;
+}
+
+.compartir-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compartir-icono img {
+    width: 28px;
+    height: 28px;
+}
+
+.reacciones {
+    display: flex;
+    gap: 10px;
+}
+
+.boton-reaccion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.boton-reaccion img {
+    width: 28px;
+    height: 28px;
+}
+
+/* ==================== INFORMACIÓN ==================== */
+
+.informacion-juego {
+    margin-top: 70px;
+}
+
+.seccion-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-icono {
+    width: 32px;
+    height: 32px;
+}
+
+.descripcion-juego {
+    max-width: 700px;
+    margin-top: 20px;
+}
+
+.inspiracion {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.inspiracion-link a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.inspiracion-link a:hover {
+  color: #7C3AED;
+  transition: color 0.2s ease-in-out;
+}
+
+
+
+/* ==================== COMUNIDAD ==================== */
+
+.comunidad {
+    margin-top: 70px;
+    padding-bottom: 50px;
+}
+
+.comunidad-titulo {
+    margin-bottom: 50px;
+}
+
+.publicar-comentario {
+    margin-bottom: 50px;
+}
+
+.subtitulo-comentario {
+    margin-bottom: 15px;
+}
+
+.comentario-input {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.usuario-input {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.input-comentarios {
+    min-height: 120px;
+    flex: 1;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #282828;
+    border: 1px solid #7a7a7acc;
+    border-radius: 12px;
+}
+
+.comentario-placeholder {
+    color: #ffffffa6;
+}
+
+.boton-publicar {
+    width: 180px;
+    align-self: flex-end;
+}
+
+
+/* Comentarios */
+
+.comentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comentario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 0;
+}
+
+.comentario-usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comentario-contenido {
+    padding: 16px;
+    background-color: #282828;
+    border-radius: 12px;
+}
+
+.comentario-reacciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike) {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike) img {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike) .icon--default {
+    opacity: 1;
+    transform: scale(1);
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike) .icon--hover {
+    opacity: 0;
+    transform: scale(0.75);
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike).activo .icon--default {
+    opacity: 0;
+    transform: scale(0.75);
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike).activo .icon--hover {
+    opacity: 1;
+    transform: scale(1);
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike):hover {
+  
+  border-color: #ff0055;
+  color: #ff0055;
+  transform: scale(1.05);
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike):hover .icon--default {
+    opacity: 0;
+    transform: scale(0.75) rotate(-8deg);
+}
+
+:is(.boton-reaccion-like, .boton-reaccion-dislike):hover .icon--hover {
+    opacity: 1;
+    transform: scale(1.05);
+  animation: heartBeat 0.4s ease-in-out forwards;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(0.5); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}

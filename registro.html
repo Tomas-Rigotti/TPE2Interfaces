@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css\globals.css">
+    <link rel="stylesheet" href="css\registro.css">
+    <link rel="stylesheet" href="css\forms.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+    <title>Crear cuenta - Todo Juegos</title>
+
+    
+</head>
+
+<body class="background-body">
+    <div class="success-card success-card--hidden" id="success-message">
+        <div class="success-card__content">
+            <h2 class="success-card__title">¡Registro exitoso!</h2>
+            <p class="success-card__message">Tu cuenta ha sido creada correctamente.</p>
+            
+        </div>
+
+    </div>
+
+    <main class="auth-page">
+
+        <div class="register-form" >
+
+            <h1>Crear cuenta</h1>
+
+            <h2 class="texto-sin-margen">Información personal</h2>
+
+            <form id="register-form" action="home.html" >
+
+                <div class="contenedor-inputs">
+                    
+                    <label for="nombre" class="text-secondary">
+                        Nombre
+                    </label>
+                    <input type="text" id="nombre" placeholder="Nombre" name="nombre">
+
+                    <label for="apellido" class="text-secondary">
+                        Apellido
+                    </label>
+                    <input type="text" id="apellido" placeholder="Apellido" name="apellido">
+                    
+                    <label for="nickname" class="text-secondary">
+                        Nickname (opcional)
+                    </label>
+                    <input type="text" id="nickname" placeholder="Nickname" name="nickname">
+
+                    <label for="edad" class="text-secondary">
+                        Edad
+                    </label>
+                    <input type="number" id="edad" placeholder="Edad" name="edad">
+                    
+                </div>
+
+                <h2 class="texto-sin-margen">Información de la cuenta</h2>
+
+                <div class="contenedor-inputs">
+                
+                    <label for="register-email" class="text-secondary">
+                        Email
+                    </label>
+                    <input type="email" id="register-email" placeholder="Email" name="email" required>
+
+                    <label for="register-password" class="text-secondary">
+                        Contraseña
+                    </label>
+                    <input type="password" id="register-password" placeholder="Contraseña" name="password" required>
+
+                
+                    <label for="repeat-password" class="text-secondary">
+                        Repetir contraseña
+                    </label>
+                    <input type="password" id="repeat-password" placeholder="Repetir contraseña" name="repeat-password" required>
+
+                    
+                
+                </div>
+                
+                <div class="captcha-boton">
+                    <img src="assets/recaptcha.svg" alt="Captcha" class="captcha">
+                
+
+                    <button class="boton-secundario" type="submit">
+                        <h4 class="texto-sin-margen">Registrarse</h4>
+                    </button>
+                </div>
+            </form>
+
+            <p class="social-title">
+                O registrarse con:
+            </p>
+
+            <div class="social-login">
+
+                <a href="home.html" class="social-link social-login-button">
+                    <img
+                        src="assets/google.svg"
+                        alt="Google"
+                        class="social-icon-img"
+                    >
+                </a>
+
+                <a href="home.html" class="social-link social-login-button">
+                    <img
+                        src="assets/facebook.svg"
+                        alt="Facebook"
+                        class="social-icon-img"
+                    >
+                </a>
+
+            </div>
+
+            <p class="register">
+                ¿Ya tenés una cuenta?
+                <a href="login.html">Iniciar sesión</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="js/registro.js"></script>
+
+</body>
+
+</html>

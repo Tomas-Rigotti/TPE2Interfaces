@@ -1,0 +1,167 @@
+/* ----------- FORMULARIO DE REGISTRO ----------- */
+
+.register-form {
+    width: 475px;
+    padding: 10px;
+    background-color: #282828;
+    border: 1px solid rgba(76, 29, 149, 0.80);
+    border-radius: 16px;
+    color: #ffffff;
+}
+
+/* Estructura de los campos personales */
+
+.contenedor-inputs {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    margin: 0 0 5px 0;
+}
+
+.captcha-boton{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+
+/* Formulario */
+
+.register-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Campo edad */
+
+#edad {
+    width: 100px;
+}
+
+
+/* CAPTCHA */
+
+.captcha {
+    width: fit-content;
+    padding: 15px 0;
+}
+
+/* ANIMACIÓN */
+
+.register-form {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.register-form--hidden {
+    display: none !important;
+}
+
+.success-card--hidden {
+    display: none !important;
+}
+
+.success-card__content {
+    margin-top: 25px;
+    width: 100%;
+    text-align: center;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+.success-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+
+    width: min(480px, calc(100vw - 40px));
+    box-sizing: border-box;
+    padding: 40px 20px;
+    margin: 0;
+
+    background-color: #1a1a1a;
+    border: 1px solid #6D28D9;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 30px #7C3AED /*(0, 255, 204, 0.3)*/;
+
+    animation: popIn 1s
+        cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.success-card__content::before {
+    content: "✓";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+
+    border: 3px solid #6D28D9;
+    border-radius: 50%;
+
+    color: #00ffcc;
+    font-size: 2.2rem;
+    font-weight: bold;
+    box-shadow: 0 0 20px #7C3AED/*rgba(0, 255, 204, 0.5)*/;
+
+    animation: scaleCheck 0.5s
+        cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.success-card__title {
+    font-family: "Orbitron", sans-serif;
+    color: #00ffcc;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.success-card__message {
+    font-family: "Play", sans-serif;
+    color: #cccccc;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.success-card__button {
+    display: inline-block;
+    padding: 10px 20px;
+
+    background-color: #00ffcc;
+    color: #121212;
+
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes scaleCheck {
+    0% {
+        transform: scale(0);
+    }
+
+    80% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
