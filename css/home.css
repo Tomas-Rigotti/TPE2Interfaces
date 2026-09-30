@@ -233,11 +233,23 @@ footer {
 
   .footer-container {
     grid-template-columns: repeat(4, max-content);
-    gap: 32px;
+    justify-content: space-between;
   }
 
   footer {
     padding: 48px 64px;
+  }
+
+  .footer-col{
+    text-align: left;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 16px;
+    margin-top: 15px;
+    justify-content: flex-start;
+    min-height: 32px;
   }
 
   .banner-bienvenida {
