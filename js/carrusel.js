@@ -155,7 +155,6 @@ function inicializarCarruselDesktop(carruselEl) {
     const puntos = Array.from(indicador.children);
 
     let indiceActual = cantidadElementos;
-    let progresoActual = 0;
 
     elementosOriginales.forEach(function (elemento) {
         carrusel.appendChild(crearClonParaLoop(elemento));
@@ -170,6 +169,10 @@ function inicializarCarruselDesktop(carruselEl) {
         const separacion = parseFloat(estilos.gap) || 0;
 
         return carrusel.children[0].getBoundingClientRect().width + separacion;
+    }
+
+    function obtenerProgreso() {
+        return ((indiceActual % cantidadPasos) + cantidadPasos) % cantidadPasos;
     }
 
     function actualizarPosicion(sinTransicion = false) {
@@ -190,19 +193,19 @@ function inicializarCarruselDesktop(carruselEl) {
     }
 
     function actualizarIndicador() {
+        const progreso = obtenerProgreso();
+
         puntos.forEach(function (punto, indice) {
-            punto.classList.toggle("activo", indice === progresoActual);
+            punto.classList.toggle("activo", indice === progreso);
         });
         indicador.setAttribute(
             "aria-label",
-            `Posición ${progresoActual + 1} de ${cantidadPasos}`
+            `Posición ${progreso + 1} de ${cantidadPasos}`
         );
     }
 
     function moverCarrusel(direccion) {
         indiceActual += direccion * elementosPorMovimiento;
-        progresoActual =
-            (progresoActual + direccion + cantidadPasos) % cantidadPasos;
 
         carrusel.classList.remove(
             "carrusel--moviendo-siguiente",

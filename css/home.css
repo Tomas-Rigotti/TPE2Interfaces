@@ -266,11 +266,3 @@ footer {
     font-size: 24px;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .preloader {
-    animation-duration: 0.01ms;
-    animation-iteration-count: 1;
-  }
-
-}
