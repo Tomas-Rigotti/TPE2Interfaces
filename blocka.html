@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
+    
+    <title>Blocka</title>
+
+  <link rel="stylesheet" href="css\globals.css">
+  <link rel="stylesheet" href="css\juego.css">
+  <link rel="stylesheet" href="css\carrusel.css">
+</head>
+
+<body>
+
+  <header class="nav-bar">
+          <div class="logo-con-menu-y">
+              <div class="iconos">
+                  <button class="tabler-icon-menu menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-overlay">
+                      <img class="icono-menu" src="img/header/menu-hamburguesa.svg" alt="" />
+                  </button>
+                  <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+                  <a href="home.html">
+                    <div class="tabler-icon-home"><img class="icono-home" src="img/header/header-home.svg" alt="Inicio" /></div>
+                  </a>
+                  
+              </div>
+              <div class="logo">
+                  <div class="lucide-gamepad"><img class="logo-icono" src="img/header/logo-dibujo.svg" alt="" /></div>
+                  <div class="logo-texto">TODO</div>
+                  <div class="logo-insignia">JUEGOS</div>
+              </div>
+              <div class="perfil">
+                  <button class="perfil-toggle" type="button" aria-label="Abrir menú de perfil" aria-expanded="false" aria-controls="perfil-dropdown">
+                      <img class="perfil-avatar" src="img/header/perfil-header.svg" alt="" />
+                  </button>
+                  <div class="perfil-dropdown" id="perfil-dropdown" hidden>
+                      <div class="perfil-opcion">Mis juegos</div>
+                      <button class="perfil-cerrar-sesion" type="button">Cerrar sesión</button>
+                  </div>
+                  <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+                  <img class="perfil-flecha" src="img/header/carrito-simple.svg" alt="" />
+              </div>
+          </div>
+  </header>
+
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+        <nav class="menu-panel" aria-label="Menú principal">
+            <div class="menu-columna">
+                  <a href="home.html">
+                    <h1>Home</h1>
+                </a>      
+            </div>
+            <div class="menu-columna">
+                <h1>Categorias</h1>
+            </div>
+
+            <div class="menu-columna">
+                <h1>Ofertas</h1>
+            </div>
+
+            <div class="menu-columna">
+                <h1>Mi perfil</h1>
+            </div>
+            <div class="menu-columna">
+              <h1>Seguinos</h1>
+              <div class="menu-social-links">
+                <a href="https://x.com" target="_blank" rel="noopener" aria-label="X">
+                    <img src="assets/x.svg" alt="">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                    <img src="assets/instagram.svg" alt="">
+                </a>
+                  
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                    <img src="assets/facebook.svg" alt="">
+                </a>
+            </div>
+          </div>
+            <div class="menu-columna">
+                <button class="menu-cerrar-sesion" type="button">Cerrar sesión</button>
+            </div>
+        </nav>
+    </div>
+
+  <main>
+    <div class="contenedor-padding">
+
+      <section class="juego-seccion">
+
+          <h1 class="titulo-juego">
+              <u>Blocka</u>
+          </h1>
+
+          <div class="breadcrumbs">
+
+                  <a href="home.html" class="breadcrumb-inicio">
+                  <img src="img/juego/breadcrumbs/breadcrumb-home.svg" alt="Inicio">
+              </a>
+
+              <img
+                  class="breadcrumb-flecha"
+                  src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+                  alt=""
+              >
+
+              <a href="#" class="breadcrumb-item">
+                  Categorías
+              </a>
+
+              <img
+                  class="breadcrumb-flecha"
+                  src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+                  alt=""
+              >
+
+              <a href="#" class="breadcrumb-item">
+                  Puzzle
+              </a>
+
+              <img
+                  class="breadcrumb-flecha"
+                  src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+                  alt=""
+              >
+
+              <span class="breadcrumb-actual">
+                  Blocka
+              </span>
+
+          </div>
+
+          <div class="juego-con-ayuda">
+
+              <div class="juego">
+                <section class="hud-panel" hidden>
+                    <div id="level-display">Nivel: <span id="current-level">1</span></div>
+                    <div id="timer" >Tiempo: 0 segundos</div>
+                    <div id="record">Récord del nivel: --</div>
+                    <div class="hud-buttons">
+                        <button id="btn-help" onclick="darAyuda()" class="boton-ejecucion-juego">Ayuda (+5s)</button>
+                        
+                    </div>
+                </section>
+
+                <section class="canvas-wrapper">
+                    <section id="pantalla-inicio" class="pantalla-inicio" aria-labelledby="titulo-inicio">
+                        <h1 id="titulo-inicio">Cyberpunk Blocka</h1>
+                        <button type="button" class="boton-primario" onclick="empezarJuego()">Empezar</button>
+                    </section>
+                    <section id="selector-piezas" class="selector-piezas" aria-labelledby="titulo-selector-piezas" hidden>
+                        <h2 id="titulo-selector-piezas">Elegí la dificultad</h2>
+                        <p class="selector-piezas-subtitulo">
+                            La cantidad de piezas se mantiene en todos los niveles.
+                            El tiempo límite <strong>no</strong> cambia con la cantidad,
+                            así que con más piezas tenés menos segundos por pieza.
+                        </p>
+                        <div id="botones-piezas" class="selector-piezas-botones"></div>
+                    </section>
+                    <section id="selector-imagen" class="selector-imagen" aria-label="Selección de imagen" hidden>
+                        <h2>Preparando nivel</h2>
+                        <div id="miniaturas-imagenes" class="miniaturas-imagenes"></div>
+                        <p id="estado-sorteo" class="estado-sorteo" role="status" aria-live="polite">Seleccionando imagen...</p>
+                        <div class="resultado-acciones">
+                            <button type="button" id="btn-reintentar-imagen" class="boton-ejecucion-juego" onclick="reintentarNivel()" hidden>Reintentar</button>
+                        </div>
+                    </section>
+                    <section id="resultado-nivel" class="resultado-nivel" aria-live="polite" hidden>
+                        <h2 id="resultado-titulo"></h2>
+                        <p id="resultado-detalle"></p>
+                        <div class="resultado-acciones">
+                            <button type="button" class="boton-ejecucion-juego" onclick="volverAlPrincipio()">Volver al principio</button>
+                            <button id="btn-reintentar-nivel" type="button" class="boton-ejecucion-juego" onclick="reintentarNivel()" hidden>Reintentar nivel</button>
+                            <button id="btn-siguiente-nivel" type="button" class="boton-ejecucion-juego" onclick="siguienteNivel()">Siguiente nivel</button>
+                        </div>
+                    </section>
+                    <canvas id="game-canvas"  hidden></canvas>
+                </section>
+              </div>
+
+              <aside class="ayuda">
+
+                  <div class="ayuda-cabecera">
+                      <h2 class="texto-sin-margen">
+                          ¿Cómo jugar?
+                      </h2>
+
+                      <button
+                          type="button"
+                          class="ayuda-icono"
+                          aria-label="Cerrar ayuda"
+                      >
+                          <img
+                              src="img/juego/instrucciones-juego/help.svg"
+                              alt=""
+                          >
+                      </button>
+                  </div>
+
+                  <div class="ayuda-texto">
+
+                      <p>
+                           <strong><u>Objetivo:</u> </strong> <br>
+                          Rotar las piezas para que la imagen quede formada correctamente.
+                      </p>
+
+                      <p>
+                          <u>Mecánica:</u><br>
+                          Click izquierdo: Rotar pieza 90° hacia la izquierda.
+                          Click derecho: Rotar pieza 90° hacia la derecha.
+                      </p>
+
+                      <p>
+                          <u>Fin del juego:</u><br>
+                          Cuando la imagen quede formada correctamente.
+                      </p>
+
+                      <p>
+                          <u>Tiempo límite:</u><br>
+                          Desde el nivel 4 vas a tener un tiempo límite para formar la imagen.
+                          Si se te acaba el tiempo, perdés el nivel, pero podés reintentarlo.
+                      </p>
+
+                  </div>
+
+              </aside>
+
+          </div>
+
+          <div class="compartir-valoracion">
+
+              <div class="compartir">
+
+                  <h4 class="compartir-titulo">
+                      Compartir en:
+                  </h4>
+
+                  <p class="compartir-icono" aria-label="Compartir">
+                      <img src="img/juego/compartir/x.svg" alt="">
+                  </p>
+
+                  <p class="compartir-icono" aria-label="Compartir en redes">
+                      <img src="img/juego/compartir/facebook.svg" alt="">
+                  </p>
+
+                  <p class="compartir-icono" aria-label="Compartir">
+                      <img src="img/juego/compartir/mensaje.svg" alt="">
+                  </p>
+
+                  <p class="compartir-icono" aria-label="Compartir">
+                      <img src="img/juego/compartir/email.svg" alt="">
+                  </p>
+
+              </div>
+
+              <div class="valoracion">
+
+                  <h4 class="valoracion-pregunta">
+                      ¿Te gusta este juego?
+                  </h4>
+
+                  <div class="reacciones">
+
+                      <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                      </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+      </section>
+
+      <section class="informacion-juego">
+
+        <div class="seccion-cabecera">
+
+              <h2 class="texto-sin-margen">
+                  <u>Información del juego</u> 
+              </h2>
+
+              <img
+                  class="info-icono"
+                  src="img/juego/informacion/informacion.svg"
+                  alt=""
+              >
+
+          </div>
+
+          <p class="descripcion-juego">
+              El blocka es un juego de ingenio, donde el jugador debe rotar las partes de una imagen hasta lograr que 
+              queden correctas. ¿Podés completar el desafío?
+          </p>
+            
+            <div class="media-seccion">
+
+                  <h3 class="texto-sin-margen">Las imágenes que podes armar</h3>
+
+                  <div class="carrusel">
+
+                      <button class="carrusel-anterior" type="button" aria-label="Anterior">
+                          ←
+                      </button>
+
+                      <div class="carrusel-ventana">
+
+                          <div class="carrusel-contenido">
+
+                            <img
+                                class="media-imagen"
+                                src="img/blocka/foto1.jpeg"
+                                alt="Imagen 1"
+                            >
+
+                            <img
+                                class="media-imagen"
+                                src="img/blocka/foto2.png"
+                                alt="Imagen 2"
+                            >
+                            <img
+                                class="media-imagen"
+                                src="img/blocka/foto3.png"
+                                alt="Imagen 3"
+                            >
+                            <img
+                                class="media-imagen"
+                                src="img/blocka/foto4.jpeg"
+                                alt="Imagen 4"
+                            >
+
+                            <img
+                                class="media-imagen"
+                                src="img/blocka/foto5.jpg"
+                                alt="Imagen 5"
+                            >
+
+                            <img
+                                class="media-imagen"
+                                src="img/blocka/foto6.jpg"
+                                alt="Imagen 6"
+                            >
+
+                            <img
+                                class="media-imagen"
+                                src="img/blocka/foto7.jpg"
+                                alt="Imagen 7"
+                            >
+
+                        </div>
+
+                      </div>
+
+                      <button class="carrusel-siguiente" type="button" aria-label="Siguiente">
+                          →
+                      </button>
+
+                  </div>
+
+                  <div class="carrusel-indicador" role="img" aria-label="Posición 1 de 7"></div>
+
+            </div>
+
+      </section>
+
+      <section class="comunidad">
+
+          <h2 class="comunidad-titulo">
+              <u>Sección de comunidad</u>
+          </h2>
+
+          <div class="publicar-comentario">
+
+              <h3 class="subtitulo-comentario">
+                  Publicar un comentario
+              </h3>
+
+              <div class="comentario-input">
+
+                  <div class="usuario-input">
+
+                        <img class="avatar"
+                            src="img/juego/comunidad/avatar-placeholder.svg"
+                            alt="Avatar del usuario">
+                      
+                      <div class="input-comentarios">
+                          <span class="comentario-placeholder">
+                              Escribí tu comentario
+                          </span>
+                      </div>
+
+                  </div>
+
+                  <button
+                      type="button"
+                      class="boton-secundario boton-publicar"
+                  >
+                      Publicar
+                  </button>
+
+              </div>
+
+          </div>
+
+          <div class="comentarios">
+
+              <h3 class="subtitulo-comentario">
+                  Comentarios
+              </h3>
+
+              <article class="comentario">
+
+                  <div class="comentario-usuario">
+
+                      <img class="avatar"
+                        src="img/juego/comunidad/avatar-placeholder.svg"
+                        alt="Avatar del usuario">
+
+                      <h4>
+                          Usuario1
+                      </h4>
+
+                  </div>
+
+                  <div class="comentario-contenido">
+                      <p>
+                          Muy facil para mi
+                      </p>
+                  </div>
+
+                  <div class="comentario-reacciones">
+
+                      <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                      </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </article>
+
+              <article class="comentario">
+
+                  <div class="comentario-usuario">
+
+                      <img class="avatar"
+                        src="img/juego/comunidad/avatar-placeholder.svg"
+                        alt="Avatar del usuario">
+
+                      <h4>
+                          Usuario2
+                      </h4>
+
+                  </div>
+
+                  <div class="comentario-contenido">
+                      <p>
+                          Muy bueno
+                      </p>
+                  </div>
+
+                  <div class="comentario-reacciones">
+
+                      <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                      </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </article>
+
+              <article class="comentario">
+
+                  <div class="comentario-usuario">
+
+                      <img class="avatar"
+                        src="img/juego/comunidad/avatar-placeholder.svg"
+                        alt="Avatar del usuario">
+
+                      <h4>
+                          Usuario3
+                      </h4>
+
+                  </div>
+
+                  <div class="comentario-contenido">
+                      <p>
+                          Esta buenisimo pero es muy dificil
+                      </p>
+                  </div>
+
+                  <div class="comentario-reacciones">
+
+                    <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                        <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                        <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                    </button>
+
+                      <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                          <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                          <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                      </button>
+
+                  </div>
+
+              </article>
+
+          </div>
+
+      </section>
+
+    </div>
+    
+  </main>
+</body>
+
+  <footer>
+        <div class="footer-container">
+            
+            <div class="footer-col">
+                <h4 class="footer-heading">Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="#">Destacados</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Contacto</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nuestras redes</a></li>
+                    <li><a href="#">Envianos tus sugerencias</a></li>
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-link" target="_blank" rel="noopener">
+                            <img src="assets/instagram.svg" alt="Instagram" class="social-icon-img">
+                        </a>
+                        <a href="https://x.com/" class="social-link" target="_blank" rel="noopener">
+                            <img src="assets/x.svg" alt="X/Twitter" class="social-icon-img">
+                        </a>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Soporte</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Código de conducta</a></li>
+                    <li><a href="#">Políticas de privacidad</a></li>
+                </ul>
+            </div>
+
+        </div> 
+        <div class="footer-bottom">
+            <p>Copyright</p>
+            <p>© 2026 TODO JUEGOS. Todos los derechos reservados</p>
+        </div>   
+  </footer>
+<script src="js/carrusel.js"></script>
+<script src="js/reacciones.js"></script>
+
+<script src="js/blocka/filters.js"></script>
+<script src="js/blocka/selector-imagen.js"></script>
+<script src="js/blocka/records.js"></script>
+<script src="js/blocka/game.js"></script>
+<script src="js/blocka/canvas.js"></script>
+<script src="js/menu.js"></script>
+</html>
