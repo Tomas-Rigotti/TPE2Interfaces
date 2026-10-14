@@ -32,15 +32,19 @@
     border: 1px solid #A78BFA;
 }
 
-#peg-solitaire .card-info > a {
+.card-info > a {
     display: flex;
-    width: calc(100% + 2px);
-    margin-left: -1px;
+    width: 100%;
     text-decoration: none;
 }
 
-#peg-solitaire .card-info > a .boton-primario {
+.card-info > a .boton-primario {
     width: 100%;
+}
+
+#peg-solitaire .card-info > a {
+    width: calc(100% + 2px);
+    margin-left: -1px;
 }
 
 .card-badge {
