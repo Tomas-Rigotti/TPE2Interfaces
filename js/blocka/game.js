@@ -1,13 +1,3 @@
-const IMAGENES = [
-    'img/blocka/foto1.jpeg',
-    'img/blocka/foto2.png',
-    'img/blocka/foto3.png',
-    'img/blocka/foto4.jpeg',
-    'img/blocka/foto5.jpg',
-    'img/blocka/foto6.jpg',
-    'img/blocka/foto7.jpg',
-];
-
 const NIVELES = [
     {nivel: 1, tiempoMaximo: null},
     {nivel: 2, tiempoMaximo: null},
@@ -101,16 +91,12 @@ function manejarErrorLienzo() {
 }
 
 function mostrarAvisoDeServidor() {
-    document.getElementById('resultado-titulo').textContent = 'Hay que abrir el juego desde un servidor web';
+    document.getElementById('resultado-titulo').textContent = 'No se pudieron leer los píxeles de la imagen';
     document.getElementById('resultado-detalle').textContent =
-        'El navegador bloqueó la lectura de los píxeles de la imagen y el juego no puede rotar las piezas. ' +
-        'Pasa cuando el archivo se abre como file:// en navegadores que aíslan cada archivo ' +
-        '(Chrome, Firefox). Tu URL actual es: ' + location.href + '. ' +
-        'Si en la barra de direcciones dice http:// o https://, este aviso no debería salir: ' +
-        'pasame lo que aparece en la consola del navegador. ' +
-        'Para jugar sin problema: en VS Code, botón derecho sobre blocka.html → "Open with Live Server" ' +
-        '(necesita la extensión Live Server instalada); o desde la carpeta del proyecto, ' +
-        '"node servidor.js" y entrá a http://localhost:8000/blocka.html';
+        'El navegador bloqueó la lectura de los píxeles y el juego no puede rotar las piezas. ' +
+        'Las imágenes viajan dentro del propio juego, así que no hace falta abrirlo desde un servidor. ' +
+        'Lo más probable es que una de las imágenes esté dañada o incompleta. ' +
+        'Mirá la consola del navegador (F12) para ver el detalle del error.';
     document.getElementById('btn-siguiente-nivel').hidden = true;
     document.getElementById('btn-reintentar-nivel').hidden = true;
     document.getElementById('resultado-nivel').hidden = false;

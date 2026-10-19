@@ -1,7 +1,8 @@
 (() => {
     const VUELTAS = 4;
-    const duracionBarrido = 1000000;
+    const duracionBarrido = 2000;
     const crecimiento = 0.04;
+    const RESPETAR_MOVIMIENTO_REDUCIDO = false;
 
     let timeoutSorteo = null;
     let versionSorteo = 0;
@@ -78,12 +79,14 @@
             contenedorMiniaturas.replaceChildren(fragmento, marcoSeleccion);
 
             const miniaturas = [...contenedorMiniaturas.querySelectorAll('.miniatura-imagen')];
-            const movimientoReducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const cantidadMiniaturas = miniaturas.length;
+            const movimientoReducido = RESPETAR_MOVIMIENTO_REDUCIDO
+                && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const indiceInicio = movimientoReducido
                 ? indiceElegido
                 : (indiceElegido + 1 + Math.floor(Math.random() * (cantidadMiniaturas - 1))) % cantidadMiniaturas;
             const ultimoPaso = movimientoReducido ? 0 : cantidadMiniaturas * VUELTAS;
+
             const pasosTemporizados = ultimoPaso;
             const sumaCrecimiento = pasosTemporizados > 0
                 ? pasosTemporizados + crecimiento * (pasosTemporizados * (pasosTemporizados - 1)) / 2
@@ -96,25 +99,35 @@
             function avanzarSorteo() {
                 if (versionActual !== versionSorteo) return;
 
-                const indiceActivo = paso === ultimoPaso
+                const esUltimoPaso = paso === ultimoPaso;
+                const indiceActivo = esUltimoPaso
                     ? indiceElegido
                     : (indiceInicio + paso) % cantidadMiniaturas;
 
                 miniaturas.forEach((miniatura, indice) => {
                     const activa = indice === indiceActivo;
                     miniatura.classList.toggle('activa', activa);
-                    miniatura.classList.toggle('seleccionada', activa && paso === ultimoPaso);
+                    miniatura.classList.toggle('seleccionada', activa && esUltimoPaso);
                     if (activa) miniatura.setAttribute('aria-current', 'true');
                     else miniatura.removeAttribute('aria-current');
                 });
 
+                const tamanoBase = miniaturas[indiceActivo].offsetWidth;
+                const tamanoAlto = miniaturas[indiceActivo].offsetHeight;
                 const rectContenedor = contenedorMiniaturas.getBoundingClientRect();
                 const rectMiniatura = miniaturas[indiceActivo].getBoundingClientRect();
-                marcoSeleccion.style.width = `${rectMiniatura.width}px`;
-                marcoSeleccion.style.height = `${rectMiniatura.height}px`;
-                marcoSeleccion.style.transform = `translate(${rectMiniatura.left - rectContenedor.left}px, ${rectMiniatura.top - rectContenedor.top}px)`;
+                const escala = esUltimoPaso ? 1.25 : 1.10;
+                const centroMiniatura = {
+                    x: rectMiniatura.left - rectContenedor.left + rectMiniatura.width / 2,
+                    y: rectMiniatura.top - rectContenedor.top + rectMiniatura.height / 2
+                };
 
-                if (paso === ultimoPaso) {
+                marcoSeleccion.style.width = `${tamanoBase}px`;
+                marcoSeleccion.style.height = `${tamanoAlto}px`;
+                marcoSeleccion.style.transform =
+                    `translate(${centroMiniatura.x - tamanoBase / 2}px, ${centroMiniatura.y - tamanoAlto / 2}px) scale(${escala})`;
+
+                if (esUltimoPaso) {
                     estadoSorteo.textContent = `Imagen ${indiceElegido + 1} seleccionada`;
                     timeoutSorteo = setTimeout(() => {
                         if (versionActual === versionSorteo) alSeleccionar(imagenElegida);
