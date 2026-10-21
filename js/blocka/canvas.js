@@ -98,7 +98,11 @@ function prepararNivel(imgSource, filtro, cantidadPiezas) {
         const color = aplicarFiltro(
             original.data[indice],
             original.data[indice + 1],
-            original.data[indice + 2]
+            original.data[indice + 2],
+            original.data,
+            indice,
+            width,
+            height
         );
 
         filtrada.data[indice] = color.r;

@@ -131,9 +131,13 @@ function getImagenAleatoria() {
 }
 
 function sortearFiltro(filtroPrevio) {
-    const candidatos = FILTROS_DISPONIBLES.filter(filtro => filtro !== filtroPrevio);
+    //Saco que no se pueda aplicar el mismo filtro dos veces seguidas, para que se aplique en todos los niveles
+    const candidatos = FILTROS_DISPONIBLES;
 
-    return candidatos[Math.floor(Math.random() * candidatos.length)];
+    return candidatos[Math.floor(Math.random() * candidatos.length)] ?? FILTROS_DISPONIBLES[0];
+    /*const candidatos = FILTROS_DISPONIBLES.filter(filtro => filtro !== filtroPrevio);
+
+    return candidatos[Math.floor(Math.random() * candidatos.length)];*/
 }
 
 function empezarJuego() {
@@ -490,8 +494,7 @@ function darAyuda() {
 
     if (piezasSinResolver.length > 0) {
         const indiceRandom = Math.floor(Math.random() * piezasSinResolver.length);
-        const piezaElegida = piezasSinResolver[indiceRandom];
-
+        const piezaElegida = piezasSinResolver[indiceRandom];  
         estadoJuego.piezas[piezaElegida] = 0;
         estadoJuego.piezasFijas[piezaElegida] = true;
 
@@ -519,4 +522,4 @@ if (document.readyState === 'loading') {
 
 window.addEventListener('load', aplicarTamanoCanvas);
 window.addEventListener('resize', aplicarTamanoCanvas);
-
+
