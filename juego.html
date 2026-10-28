@@ -142,10 +142,19 @@
           <div class="juego-con-ayuda">
 
               <div class="juego">
-                  <img
-                      class="juego-fondo"
-                      src="img/juego/placeholder-ejecucion.png"
-                      alt="">
+                <section class="hud-panel" hidden>
+                    <div id="level-display">Nivel: <span id="current-level">1</span></div>
+                    <div id="timer" >Tiempo: 0 segundos</div>
+                    <div id="record">Récord del nivel: --</div>
+                    <div class="hud-buttons">
+                        <button id="btn-help" onclick="darAyuda()" class="boton-ejecucion-juego">Ayuda (+5s)</button>
+                        
+                    </div>
+                </section>
+                <button id="iniciar-juego" onclick="iniciarJuego()" class="boton-ejecucion-juego">Iniciar (boton temporario)</button>
+                <section class="canvas-wrapper">
+                    <canvas id="solitaire-canvas"></canvas>
+                </section>
               </div>
 
 
@@ -606,6 +615,12 @@
             <p>© 2026 TODO JUEGOS. Todos los derechos reservados</p>
         </div>   
   </footer>
+<script src="js/peg-solitaire/ficha.js"></script>
+<script src="js/peg-solitaire/tablero.js"></script>
+<script src="js/peg-solitaire/vista.js"></script>
+<script src="js/peg-solitaire/juegoController.js"></script>
+<script src="js/peg-solitaire/pegSolitaireController.js"></script>
+<script src="js/peg-solitaire/TEMPORAL.js"></script>
 <script src="js/carrusel.js"></script>
 <script src="js/reacciones.js"></script>
 <script src="js/menu.js"></script>
