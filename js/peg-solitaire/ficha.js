@@ -16,10 +16,14 @@ class Ficha{
         console.log("[Ficha] ficha movida correctamente");
     }
 
+    //Expone consultas sobre los movimientos de las fichas
+    //el tablero realiza el cálculo porque conoce el estado y las reglas del juego.
+    //Delega al tablero calcular los movimientos posibles
     obtenerMovimientosPosibles(tablero){
         return tablero.obtenerMovimientosPosibles(this);
     }
 
+    //Actualiza y devuelve si la ficha tiene un movimiento posible
     tieneMovimientosPosibles(tablero){
         const movimientos = this.obtenerMovimientosPosibles(tablero);
         this.tieneMovimiento = movimientos.length > 0;

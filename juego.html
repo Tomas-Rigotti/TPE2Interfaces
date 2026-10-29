@@ -143,17 +143,29 @@
 
               <div class="juego">
                 <section class="hud-panel" hidden>
-                    <div id="level-display">Nivel: <span id="current-level">1</span></div>
-                    <div id="timer" >Tiempo: 0 segundos</div>
-                    <div id="record">Récord del nivel: --</div>
-                    <div class="hud-buttons">
-                        <button id="btn-help" onclick="darAyuda()" class="boton-ejecucion-juego">Ayuda (+5s)</button>
+                    <div class="hud-tiempo">
+                        <span class="hud-tiempo-etiqueta">Tiempo restante:</span>
+                        <span id="tiempo-restante">00:00</span>
                         
                     </div>
+
+                    <span id="tiempo-transcurrido">00:00</span>
+
+                    <button id="btn-reiniciar" type="button" class="boton-ejecucion-juego">
+                        Reiniciar
+                    </button>
                 </section>
-                <button id="iniciar-juego" onclick="iniciarJuego()" class="boton-ejecucion-juego">Iniciar (boton temporario)</button>
-                <section class="canvas-wrapper">
-                    <canvas id="solitaire-canvas"></canvas>
+                    
+                    <section class="canvas-wrapper">
+                        <section id="pantalla-inicio" class="pantalla-inicio"
+                            aria-labelledby="titulo-inicio">
+                            <h1 id="titulo-inicio">Cyberpunk Peg Solitaire</h1>
+                            <button id="iniciar-juego" type="button" class="boton-primario">
+                                Empezar
+                            </button>
+                    </section>
+
+                    <canvas id="solitaire-canvas" hidden></canvas>
                 </section>
               </div>
 

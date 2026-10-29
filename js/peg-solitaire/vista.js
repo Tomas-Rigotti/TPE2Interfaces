@@ -1,35 +1,40 @@
 class Vista{
-    TAMANIO_CELDA = 700/7;
-    TAMANIO_TABLERO = this.TAMANIO_CELDA * 7;
+    //Ancho y alto internos del canvas (en pixeles)
+    TAMANIO_TABLERO = 700;
+    //Radio de los espacios vacios
     RADIO_HUECO = 8;
+
+    //Ancho y alto de cada celda
+    TAMANIO_CELDA = 80;
 
     constructor(){
         this.canvas = document.getElementById('solitaire-canvas');
         this.canvas.width = 700;
         this.canvas.height = 700;
+        
         this.ctx = this.canvas.getContext('2d');
+        this.imagenTablero = new Image();
+        this.imagenTablero.src = 'img/juego/solitaire/fondo/fondo6.png';
+
+        this.INICIO_X = (this.canvas.width - 7 * this.TAMANIO_CELDA) / 2;
+        this.INICIO_Y = (this.canvas.height - 7 * this.TAMANIO_CELDA) / 2;
     }
 
-    //A partir de una posicion en pixeles, devuelve la posicion en la matriz de la celda
-    aCelda(x, y){
 
-        /*Para que detecte el centro de la celda NO SIRVE
-        const col = Math.floor((x - this.TAMANIO_CELDA / 2) / this.TAMANIO_CELDA);
-        const fila = Math.floor((y - this.TAMANIO_CELDA / 2) / this.TAMANIO_CELDA);*/
-
-        //Para que detecte cualquier lugar en la celda
-        const col = Math.floor(x / this.TAMANIO_CELDA);
-        const fila = Math.floor(y / this.TAMANIO_CELDA);
+    //Pasa coordenadas x, y a un objeto {fila, col}
+    aCelda(x, y) {
+        const col = Math.floor((x - this.INICIO_X) / this.TAMANIO_CELDA);
+        const fila = Math.floor((y - this.INICIO_Y) / this.TAMANIO_CELDA);
 
         return {fila, col};
     }
 
-    //A partir de una posicion de la matriz, devuelve la posicion del centro de la celda
-    aPixeles(fila, col){
-        const x = col * this.TAMANIO_CELDA + (this.TAMANIO_CELDA / 2);
-        const y = fila * this.TAMANIO_CELDA + (this.TAMANIO_CELDA / 2); 
-    
-        return {x, y};
+    //Pasa objeto {fila, col} a coordenadas del centro de la celda
+    aPixeles(fila, col) {
+        return {
+            x: this.INICIO_X + (col + 0.5) * this.TAMANIO_CELDA,
+            y: this.INICIO_Y + (fila + 0.5) * this.TAMANIO_CELDA
+        };
     }
 
     //Dibuja todo el tablero, dibuja huecos en todos los slots de fichas, y donde hay fichas
@@ -37,31 +42,63 @@ class Vista{
     dibujar(tablero, arrastre = null, ahora = 0){
         const matriz = tablero.matriz; 
         this.ctx.clearRect(0, 0, this.TAMANIO_TABLERO, this.TAMANIO_TABLERO);
+
+        if (this.imagenTablero.complete && this.imagenTablero.naturalWidth > 0) {
+            this.ctx.drawImage(
+                this.imagenTablero,
+                0, 0,
+                this.TAMANIO_TABLERO,
+                this.TAMANIO_TABLERO
+            );
+            
+        }
         
+        this.dibujarSombraTablero(matriz);
+
+        //Recorro la matriz y dibujo segun lo que tenga 
         for(let fila = 0; fila < matriz.length; fila++){
             for(let col = 0; col < matriz[fila].length; col++){
                 if(matriz[fila][col] !== -1){
+
+                    this.ctx.save();
                     //Calculo la esquina superior izquierda de la casilla para dibujar el cuadrado
-                    const x = col * this.TAMANIO_CELDA;
-                    const y = fila * this.TAMANIO_CELDA;
-                    
+                    const {x: centroX, y: centroY} = this.aPixeles(fila, col);
+                    const x = this.INICIO_X + col * this.TAMANIO_CELDA;
+                    const y = this.INICIO_Y + fila * this.TAMANIO_CELDA;
+                
                     //Dibujo el fondo de la casilla
-                    this.ctx.fillStyle = '#e0e0e0';
-                    this.ctx.fillRect(x, y, this.TAMANIO_CELDA, this.TAMANIO_CELDA)
+                    const tonosVioleta = [
+                        'rgba(125, 45, 190, 0.22)',
+                        'rgba(155, 75, 220, 0.26)',
+                        'rgba(100, 35, 165, 0.30)'
+                    ];
+
+                    const tono = (fila * 7 + col * 3) % tonosVioleta.length;
+                    this.ctx.fillStyle = tonosVioleta[tono];
+                    this.ctx.fillRect(x, y, this.TAMANIO_CELDA, this.TAMANIO_CELDA);
 
                     //Dibujo el borde de la casilla
-                    this.ctx.strokeStyle = '#999999';
+                    this.ctx.strokeStyle = '#e8b3ff'; // violeta claro del borde
+                    this.ctx.lineWidth = 2;
+                    this.ctx.shadowColor = '#a100ff'; // resplandor violeta
+                    this.ctx.shadowBlur = 12;
+
+                    //Dibujo la linea con el contorno del tamaño de la celda
                     this.ctx.strokeRect(x, y, this.TAMANIO_CELDA, this.TAMANIO_CELDA);
 
-                    //Dibujo el hueco vacio
-                    const {x: centroX, y: centroY} = this.aPixeles(fila, col);
+                    this.ctx.restore();
 
-                    //Si no hay una ficha
+                    //Dibuja el hueco en todas las celdas
+                    this.ctx.save();
                     this.ctx.beginPath();
                     this.ctx.arc(centroX, centroY, this.RADIO_HUECO, 0, Math.PI * 2);
-                    this.ctx.fillStyle = '#000000';
-                    this.ctx.fill();
+                    this.ctx.fillStyle = '#160b2e';
+     
+                    this.ctx.shadowColor = `rgba(80, 170, 255, 1)`;
+                    this.ctx.shadowBlur = 12;
                     this.ctx.closePath();
+                    this.ctx.fill();
+                    this.ctx.restore();
                 }
             }
         }
@@ -75,25 +112,27 @@ class Vista{
             const {x: centroX, y: centroY} = this.aPixeles(f.fila, f.col);
             this.ctx.beginPath();
             this.ctx.arc(centroX, centroY, 20, 0, Math.PI * 2);
-            this.ctx.fillStyle = '#1765da';
+            this.ctx.fillStyle = '#09ff6f';
             this.ctx.fill();
             this.ctx.closePath();
         }
 
+        //Si hay arrastre y hay destinos posibles, dibuja los hints
         if(arrastre){
             
             if(arrastre && arrastre.destinos.length > 0){
                 this.dibujarHints(arrastre.destinos, ahora);
             }
 
+            //Calcula donde dibujar la ficha mientras se mueve el mouse
             const x = arrastre.mouse.x - arrastre.punto.x;
             const y = arrastre.mouse.y - arrastre.punto.y;
 
+            //Dibuja la ficha mientras se arrastra
             this.ctx.save();
-
             this.ctx.beginPath();
             this.ctx.arc(x, y, 30, 0, Math.PI * 2);
-            this.ctx.fillStyle = /*'#17da99'*/ 'rgb(243, 22, 70)';
+            this.ctx.fillStyle = 'rgb(243, 22, 70)';
             this.ctx.shadowColor = 'rgba(0, 0, 0.5)';
             this.ctx.shadowBlur = 10;
             this.ctx.shadowOffsetY = 10;
@@ -105,19 +144,14 @@ class Vista{
         
     }
 
+    //Dibuja los hints animados
     dibujarHints(destinos, ahora){
-        console.log(ahora);
+        //Pulso de la animacion del anillo
         const pulso = (Math.sin(ahora * 0.005) + 1) / 2;
 
-        const radio = this.RADIO_HUECO + pulso * 5;
-        const intensidad = Math.round(100 + pulso * 100);
-
-        
-
-
+        //Para cada destino en el arreglo de destinos posibles, dibuja un indicador animado
         for (const destino of destinos) {
             const {x,y} = this.aPixeles(destino.fila, destino.col);
-            //const anim = y - 0.2 - 1 - pulso * 3;
 
             const radioAnillo = this.RADIO_HUECO + pulso * 12;
             const opacidad = 1 - pulso;
@@ -137,15 +171,29 @@ class Vista{
             this.ctx.fill();
             this.ctx.closePath();
 
-            
-            /*this.ctx.moveTo(x-5, anim-5);
-            this.ctx.lineTo(x,anim);
-            this.ctx.lineTo(x+5, anim-12);
-            this.ctx.lineWidth = 2;
-            this.ctx.stroke();*/
-
-
-            
         }
+    }
+
+    dibujarSombraTablero(matriz) {
+        this.ctx.save();
+        this.ctx.beginPath();
+
+        for (let fila = 0; fila < matriz.length; fila++) {
+            for (let col = 0; col < matriz[fila].length; col++) {
+                if (matriz[fila][col] !== -1) {
+                    const x = this.INICIO_X + col * this.TAMANIO_CELDA;
+                    const y = this.INICIO_Y + fila * this.TAMANIO_CELDA;
+
+                    this.ctx.rect(x, y, this.TAMANIO_CELDA, this.TAMANIO_CELDA);
+                }
+            }
+        }
+
+        this.ctx.fillStyle = 'rgba(35, 8, 55, 0.12)';
+        this.ctx.shadowColor = 'rgba(161, 0, 255, 1)';
+        this.ctx.shadowBlur = 24;
+        this.ctx.fill();
+
+        this.ctx.restore();
     }
 }

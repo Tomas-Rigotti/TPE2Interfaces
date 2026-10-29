@@ -100,6 +100,7 @@ class JuegoController{
     }
 
     //Cuando se mueve el mouse, si esta arrastrando una ficha, actualizo la posicion del mouse en el objeto arrastre
+    //y redibuja
     onMouseMove(e){
         if(!this.arrastre){
             return;
