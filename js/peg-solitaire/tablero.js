@@ -1,7 +1,7 @@
 class Tablero{
     fichas = [];
 
-    constructor(){
+    constructor(tipo = "tipo1"){
         this.matriz = [
             [-1,-1,1,1,1,-1,-1],
             [-1,-1,1,1,1,-1,-1],
@@ -18,7 +18,7 @@ class Tablero{
             for(let j = 0; j < this.matriz[i].length; j++){
                 if(this.matriz[i][j] === 1){
                     contadorId++;
-                    this.fichas.push(new Ficha(contadorId,"Tipo",i,j,false,false))
+                    this.fichas.push(new Ficha(contadorId,tipo,i,j,false,false))
                 }
             }
         }
@@ -37,7 +37,7 @@ class Tablero{
     //Elimina una ficha
     eliminarFicha(id){
         if(id < 0 || id > 31){
-            console.log("[Tablero] id invalida")
+            // console.log("[Tablero] id invalida")
             return;
         }
 
@@ -56,15 +56,15 @@ class Tablero{
     //Verifica si desde un origen {fila: x col: x} se puede mover a un destino
     esMovimientoValido(origen, destino){
         if(destino.fila < 0 || destino.fila > 6 || destino.col < 0 || destino.col > 6){
-            console.log("[Tablero] Movimiento invalido")
+            // console.log("[Tablero] Movimiento invalido")
             return false;
         }
         if(this.matriz[destino.fila][destino.col] === -1){
-            console.log("[Tablero] No hay tablero")
+            // console.log("[Tablero] No hay tablero")
             return false;
         }
         if(this.matriz[destino.fila][destino.col] === 1){
-            console.log("[Tablero] Ya hay una ficha ahi")
+            // console.log("[Tablero] Ya hay una ficha ahi")
             return false;
         }
 
@@ -77,7 +77,7 @@ class Tablero{
 
         //Verifico que el movimiento sea exactamente de 2 casillas
         if(!movimientoRecto){
-            console.log("[Tablero] El movimiento debe ser de 2 casillas");
+            // console.log("[Tablero] El movimiento debe ser de 2 casillas");
             return false;
         }
         
@@ -86,7 +86,7 @@ class Tablero{
         const medioCol = origen.col + (deltaCol / 2);
 
         if(this.matriz[medioFila][medioCol] !== 1){
-            console.log("[Tablero] Debe haber una ficha en el medio");
+            // console.log("[Tablero] Debe haber una ficha en el medio");
             return false;
         }
         //Si pasa todas las validaciones retorna true
@@ -95,7 +95,7 @@ class Tablero{
 
     realizarMovimiento(ficha, destino){
         if(!this.esMovimientoValido({fila:ficha.fila, col:ficha.col}, destino)){
-            console.log("No es movimiento valido");
+            // console.log("No es movimiento valido");
             return false;
         }
 
@@ -157,19 +157,19 @@ class Tablero{
                 return true;
             }
         }
-        console.log("NO HAY MAS MOVIMIENTOS POSIBLES")
+        // console.log("NO HAY MAS MOVIMIENTOS POSIBLES")
         return false;
     }
 
     //Dada la posicion en la matriz, devuelvo esa ficha
     obtenerFichaEn(fila, col){
         if(fila < 0 || fila >6 || col < 0 || col > 6){
-            console.log("[Tablero] posicion invalida en obtenerFichaEn")
+            // console.log("[Tablero] posicion invalida en obtenerFichaEn")
             return null;
         }
 
-        if(this.matriz[fila][col] ==! 1){
-            console.log("[Tablero] Ahi no hay una ficha")
+        if(this.matriz[fila][col] !== 1){
+            // console.log("[Tablero] Ahi no hay una ficha")
             return null;
         }
         

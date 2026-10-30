@@ -1,15 +1,104 @@
 class PegSolitaireController extends JuegoController{
-    constructor(tablero, vista, tiempoLimite){
-        const canvas = document.getElementById('solitaire-canvas');
-        super(canvas, tablero, vista);
+    constructor(vista, interfaz, tiempoLimite){
+        super(interfaz.canvas, null, vista, tiempoLimite, interfaz);
 
+        //Tipo de ficha elegido en la pantalla de seleccion
+        this.tipoElegido = null;
+        this.tiempoElegido = null;
+
+        this.mostrarSeleccionTipo = this.mostrarSeleccionTipo.bind(this);
+        this.seleccionarTipo = this.seleccionarTipo.bind(this);
+        this.seleccionarTiempo = this.seleccionarTiempo.bind(this);
+        this.comenzarPartida = this.comenzarPartida.bind(this);
+        this.reiniciarNivel = this.reiniciarNivel.bind(this);
+        this.volverAlInicio = this.volverAlInicio.bind(this);
+
+        //Conecta los botones de la interfaz con sus handlers
+        this.interfaz.conectarEventos({
+            iniciar: this.mostrarSeleccionTipo,
+            tipo: this.seleccionarTipo,
+            tiempo: this.seleccionarTiempo,
+            comenzar: this.comenzarPartida,
+            reiniciarNivel: this.reiniciarNivel,
+            cambiarFicha: this.volverAlInicio,
+            reiniciarFin: this.volverAlInicio
+        });
+
+        //Cuando terminan de cargar las imagenes, se habilita el boton de comenzar
+        this.vista.imagenesListas.then(() => this.actualizarBotonComenzar());
+    }
+
+    //Pasa de la pantalla de inicio a la pantalla de seleccion de ficha
+    mostrarSeleccionTipo(){
+        this.interfaz.mostrarSeleccion();
+    }
+
+    //Guarda el tipo elegido
+    seleccionarTipo(e){
+        this.tipoElegido = e.currentTarget.dataset.tipo;
+        this.interfaz.marcarTipo(this.tipoElegido);
+        this.actualizarBotonComenzar();
+    }
+
+    seleccionarTiempo(e){
+        this.tiempoElegido = Number(e.currentTarget.dataset.minutos) * 60000;
+        this.interfaz.marcarTiempo(this.tiempoElegido / 60000);
+        this.actualizarBotonComenzar();
+    }
+
+    actualizarBotonComenzar(){
+        this.interfaz.habilitarComenzar(
+            Boolean(this.tipoElegido && this.tiempoElegido && this.vista.imagenesCargadas)
+        );
+    }
+
+    //Muestra el tablero, crea el tablero con el tipo de ficha y arranca el loop
+    iniciar(){
+        this.interfaz.mostrarJuego();
+
+        this.tablero = new Tablero(this.tipoElegido);
+
+        super.reiniciar();
+    }
+
+    //Verifica que se cumplan las condiciones de eleccion antes de empezar la partida    
+    comenzarPartida(){
+        if(!this.tipoElegido || !this.tiempoElegido || !this.vista.imagenesCargadas){
+            return;
+        }
+
+        this.tiempoLimite = this.tiempoElegido;
+        this.iniciar();
+    }
+
+    //Reinicia la partida actual con la misma ficha y el mismo tiempo
+    reiniciarNivel(){
+        if(!this.tipoElegido || !this.tiempoElegido){
+            return;
+        }
+
+        this.tiempoLimite = this.tiempoElegido;
+        this.interfaz.mostrarFin(null);
+        this.iniciar();
+    }
+
+    //Vuelve a la pantalla de presentacion y borra el tipo elegido
+    volverAlInicio(){
+        cancelAnimationFrame(this.raf);
+
+        this.tiempoElegido = null;
+        this.tablero = null;
+        this.arrastre = null;
         this.mensaje = null;
-        this.inicio = performance.now();
-        this.tiempoLimite = tiempoLimite;
-        this.raf = null;
         this.fin = null;
-        this.loop = this.loop.bind(this);
-        this.raf = requestAnimationFrame(this.loop);
+        this.tipoElegido = null;
+
+        //Oculta el cartel de fin de juego
+        this.interfaz.mostrarFin(null);
+
+        this.interfaz.mostrarInicio();
+        this.interfaz.limpiarSeleccion();
+        this.actualizarHUD(this.tiempoLimite);
     }
 
     onMouseDown(e){
@@ -29,7 +118,7 @@ class PegSolitaireController extends JuegoController{
     }
 
     onMouseUp(e){
-        if(!this.arrastre){
+        if(!this.tablero || !this.arrastre){
             return;
         }
 
@@ -84,78 +173,7 @@ class PegSolitaireController extends JuegoController{
         }
 
         if (!this.tablero.hayMovimientosPosibles()) {
-            alert('NO QUEDAN MOVIMIENTOS POSIBLES');
             this.finalizarJuego('No quedan movimientos posibles');
         }
-    }
-
-    //Calcula el tiempo, si se termino, para el juego y pasa los atributos a la vista
-    loop(ahora){
-        if (!this.mensaje && ahora - this.inicio >= this.tiempoLimite){
-            this.finalizarJuego(
-                'Se acabó el tiempo',
-                this.inicio + this.tiempoLimite
-            );
-        }
-
-        //Si hay atributo ahora, lo guarda en instanteActual, si no guarda fin
-        const instanteActual = this.fin ?? ahora;
-        //Calcula tiempo transcurrido
-        const transcurrido = instanteActual - this.inicio;
-        //El tiempo restante, el maximo entre 0 y tiempoLimite - transcurrido
-        const restante = Math.max(0, this.tiempoLimite - transcurrido);
-
-        //document.getElementById('tiempo-transcurrido').textContent = this.formatearTiempo(transcurrido);
-        document.getElementById('tiempo-restante').textContent = this.formatearTiempo(restante);
-
-        if(restante === 0 && !this.mensaje){
-            console.log("SE ACABO EL TIEMPO");
-            this.finalizarJuego("Se acabo el tiempo");
-        }
-
-        this.vista.dibujar(
-            this.tablero,
-            this.arrastre,
-            ahora,
-        );
-
-        //Si no hay un mensaje, dibuja el proximo frame
-        if (!this.mensaje) {
-            this.raf = requestAnimationFrame(this.loop);
-        }
-    }
-
-    //Cancela el proximo frame, reinicia las variables del juego y dibuja el tablero por defecto
-    reiniciar() {
-        cancelAnimationFrame(this.raf);
-
-        this.tablero = new Tablero();
-        this.arrastre = null;
-        this.mensaje = null;
-        this.fin = null;
-        this.inicio = performance.now();
-
-        //document.getElementById('tiempo-transcurrido').textContent = this.formatearTiempo(0);
-        document.getElementById('tiempo-restante').textContent = this.formatearTiempo(this.tiempoLimite);
-
-        this.vista.dibujar(this.tablero);
-        this.raf = requestAnimationFrame(this.loop);
-    }
-
-    //Si detecta un mensaje, termina el juego y guarda el momento donde finalizo
-    finalizarJuego(mensaje, instante = performance.now()) {
-        if (this.mensaje) return;
-
-        this.mensaje = mensaje;
-        this.fin = instante;
-    }
-
-    //Transforma el tiempo a minutos y segundos para mostrarlo 
-    formatearTiempo(milisegundos) {
-        const totalSegundos = Math.floor(milisegundos / 1000);
-        const minutos = Math.floor(totalSegundos / 60);
-        const segundos = totalSegundos % 60;
-
-        return `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
     }
 }

@@ -13,12 +13,11 @@ class Ficha{
     moverA(fila, col){
         this.fila = fila;
         this.col = col;
-        console.log("[Ficha] ficha movida correctamente");
+        // console.log("[Ficha] ficha movida correctamente");
     }
 
-    //Expone consultas sobre los movimientos de las fichas
-    //el tablero realiza el cálculo porque conoce el estado y las reglas del juego.
     //Delega al tablero calcular los movimientos posibles
+    //el tablero realiza el cálculo porque conoce el estado y las reglas del juego.
     obtenerMovimientosPosibles(tablero){
         return tablero.obtenerMovimientosPosibles(this);
     }

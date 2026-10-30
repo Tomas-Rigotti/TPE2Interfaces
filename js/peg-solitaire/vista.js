@@ -4,6 +4,9 @@ class Vista{
     //Radio de los espacios vacios
     RADIO_HUECO = 8;
 
+    //Radio de una ficha en reposo
+    RADIO_FICHA = 20;
+
     //Ancho y alto de cada celda
     TAMANIO_CELDA = 80;
 
@@ -16,8 +19,59 @@ class Vista{
         this.imagenTablero = new Image();
         this.imagenTablero.src = 'img/juego/solitaire/fondo/fondo6.png';
 
+        //Imagen de cada tipo de ficha
+        this.imagenesFichas = {
+            tipo1: this.cargarImagen('img/juego/solitaire/fichas/ficha1.png'),
+            tipo2: this.cargarImagen('img/juego/solitaire/fichas/ficha2.png')
+        };
+
+        //Promesa que se resuelve cuando terminaron de cargar (o fallaron) las imagenes
+        this.imagenesListas = this.cargarImagenes();
+
         this.INICIO_X = (this.canvas.width - 7 * this.TAMANIO_CELDA) / 2;
         this.INICIO_Y = (this.canvas.height - 7 * this.TAMANIO_CELDA) / 2;
+    }
+
+    cargarImagen(ruta){
+        const imagen = new Image();
+        imagen.src = ruta;
+        return imagen;
+    }
+
+    //Espera a que terminen de cargar las imagenes del canvas. Si alguna falla,
+    //tambien resuelve para que el juego arranque con el circulo de respaldo.
+    cargarImagenes(){
+        const imagenes = [
+            this.imagenTablero,
+            ...Object.values(this.imagenesFichas)
+        ];
+
+        const esperar = (imagen) => new Promise(resolve => {
+            //Si ya termino de cargar (o fallo), no hay evento que esperar
+            if(imagen.complete){
+                resolve();
+                return;
+            }
+
+            const listo = () => resolve();
+            imagen.addEventListener('load', listo, { once: true });
+            imagen.addEventListener('error', listo, { once: true });
+
+            //Por si termino entre el chequeo y el listener
+            if(imagen.complete){
+                resolve();
+            }
+        });
+
+        this.imagenesCargadas = imagenes.every(imagen => imagen.complete);
+
+        if(this.imagenesCargadas){
+            return Promise.resolve();
+        }
+
+        return Promise.all(imagenes.map(esperar)).then(() => {
+            this.imagenesCargadas = true;
+        });
     }
 
 
@@ -38,9 +92,14 @@ class Vista{
     }
 
     //Dibuja todo el tablero, dibuja huecos en todos los slots de fichas, y donde hay fichas
-    //dibuja la ficha. Asi todos los lugares tienen un hueco dibujado
-    dibujar(tablero, arrastre = null, ahora = 0){
+    //dibuja la ficha. Asi todos los lugares tienen un hueco dibujado.
+    //Recibe el arrastre, ahora, y el restante
+    dibujar(tablero, arrastre = null, ahora = 0, restante = 0){
         const matriz = tablero.matriz; 
+
+        this.restante = restante;
+
+
         this.ctx.clearRect(0, 0, this.TAMANIO_TABLERO, this.TAMANIO_TABLERO);
 
         if (this.imagenTablero.complete && this.imagenTablero.naturalWidth > 0) {
@@ -78,9 +137,9 @@ class Vista{
                     this.ctx.fillRect(x, y, this.TAMANIO_CELDA, this.TAMANIO_CELDA);
 
                     //Dibujo el borde de la casilla
-                    this.ctx.strokeStyle = '#e8b3ff'; // violeta claro del borde
+                    this.ctx.strokeStyle = '#e8b3ff';
                     this.ctx.lineWidth = 2;
-                    this.ctx.shadowColor = '#a100ff'; // resplandor violeta
+                    this.ctx.shadowColor = '#a100ff';
                     this.ctx.shadowBlur = 12;
 
                     //Dibujo la linea con el contorno del tamaño de la celda
@@ -106,15 +165,11 @@ class Vista{
         //Recorre el ARREGLO de fichas, convierte la posicion fila columna de cada una a pixeles del canvas
         //y las dibuja encima de los huecos, salvo que se este arrastrando
         for(const f of tablero.fichas){
-            if(arrastre && f === arrastre.ficha){
+            if(f.arrastrada){
                 continue;
             }
             const {x: centroX, y: centroY} = this.aPixeles(f.fila, f.col);
-            this.ctx.beginPath();
-            this.ctx.arc(centroX, centroY, 20, 0, Math.PI * 2);
-            this.ctx.fillStyle = '#09ff6f';
-            this.ctx.fill();
-            this.ctx.closePath();
+            this.dibujarFicha(f.tipo, centroX, centroY);
         }
 
         //Si hay arrastre y hay destinos posibles, dibuja los hints
@@ -125,29 +180,51 @@ class Vista{
             }
 
             //Calcula donde dibujar la ficha mientras se mueve el mouse
-            const x = arrastre.mouse.x - arrastre.punto.x;
-            const y = arrastre.mouse.y - arrastre.punto.y;
+            const {x, y} = arrastre.mouse;
 
             //Dibuja la ficha mientras se arrastra
-            this.ctx.save();
-            this.ctx.beginPath();
-            this.ctx.arc(x, y, 30, 0, Math.PI * 2);
-            this.ctx.fillStyle = 'rgb(243, 22, 70)';
-            this.ctx.shadowColor = 'rgba(0, 0, 0.5)';
-            this.ctx.shadowBlur = 10;
-            this.ctx.shadowOffsetY = 10;
-            this.ctx.fill();
-            this.ctx.closePath();
-
-            this.ctx.restore();
+            this.dibujarFicha(arrastre.ficha.tipo, x, y, true);
         }
-        
     }
 
-    //Dibuja los hints animados
-    dibujarHints(destinos, ahora){
+    //Dibuja una ficha. Si no hay imagen, dibuja un circulo de color
+    dibujarFicha(tipo, x, y, levantada = false){
+        //Levantada se dibuja mas grande que en reposo
+        const radio = levantada ? this.RADIO_FICHA * 1.5 : this.RADIO_FICHA;
+        const imagen = this.imagenesFichas[tipo];
+
+        this.ctx.save();
+
+        //Si la ficha esta levantada, dibuja una sombra
+        if(levantada){
+            this.ctx.beginPath();
+            this.ctx.arc(x, y + 10, radio, 0, Math.PI * 2);
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+            this.ctx.fill();
+            this.ctx.closePath();
+        }
+
+        if(imagen && imagen.complete && imagen.naturalWidth > 0){
+            //Recorta la imagen en circulo con clip y la dibuja
+            this.ctx.beginPath();
+            this.ctx.arc(x, y, radio, 0, Math.PI * 2);
+            this.ctx.clip();
+            this.ctx.drawImage(imagen, x - radio, y - radio, radio * 2, radio * 2);
+        } else {
+            this.ctx.beginPath();
+            this.ctx.arc(x, y, radio, 0, Math.PI * 2);
+            this.ctx.fillStyle = levantada ? 'rgb(243, 22, 70)' : '#09ff6f';
+            this.ctx.fill();
+            this.ctx.closePath();
+        }
+
+        this.ctx.restore();
+    }
+
+    //Dibuja los hints animados. tiempo controla la animacion
+    dibujarHints(destinos, tiempo){
         //Pulso de la animacion del anillo
-        const pulso = (Math.sin(ahora * 0.005) + 1) / 2;
+        const pulso = (Math.sin(tiempo * 0.005) + 1) / 2;
 
         //Para cada destino en el arreglo de destinos posibles, dibuja un indicador animado
         for (const destino of destinos) {
