@@ -65,7 +65,6 @@
     position: absolute;
     top: calc(0px - var(--alto-hud));
     left: 0;
-    
     display: flex;
     width: 100%;
     min-height: var(--alto-hud);
@@ -73,12 +72,12 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    
 }
 
 .canvas-wrapper {
     display: grid;
-    width: min(1000px, 100%);
+    width: min(100%, 1000px, calc(100dvh - 320px));
+    /*width: min(1000px, 100%);*/
     max-width: 100%;
     aspect-ratio: 1 / 1;
     margin-inline: auto;
@@ -90,39 +89,23 @@
     min-height: 0;
 }
 
-.pantalla-inicio[hidden],
-.hud-panel[hidden] {
-    display: none;
-}
 
-.pantalla-inicio {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 28px;
-    padding: 24px;
-    border: 1px solid #3f3f46;
-    border-radius: 8px;
-    background-color: #171717;
-    text-align: center;
-}
-
-.pantalla-inicio h1 {
-    margin: 0;
-    color: #ffffff;
-    font-family: var(--font-title);
-    font-size: 40px;
-}
 
 #game-canvas {
     display: block;
     width: 100%;
     height: 100%;
     margin: auto;
+}
+
+
+#tiempo-restante {
+    color: #ffffff;
+    font-family: var(--font-title);
+
+    font-weight: 700;
+    text-shadow: 0 0 8px #a100ff;
+    font-variant-numeric: tabular-nums;
 }
 
 #timer.timer--urgente {

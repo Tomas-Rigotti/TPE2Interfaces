@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css\globals.css">
   <link rel="stylesheet" href="css\juego.css">
   <link rel="stylesheet" href="css\carrusel.css">
+  <link rel="stylesheet" href="css\solitaire.css">
 </head>
 
 <body>
@@ -142,10 +143,72 @@
           <div class="juego-con-ayuda">
 
               <div class="juego">
-                  <img
-                      class="juego-fondo"
-                      src="img/juego/placeholder-ejecucion.png"
-                      alt="">
+                <section class="hud-panel" hidden>
+                    <div class="hud-tiempo">
+                        <span class="hud-tiempo-etiqueta">Tiempo restante:</span>
+                        <span id="tiempo-restante">00:00</span>
+                        
+                    </div>
+
+                    
+
+                    <div class="hud-acciones">
+                        <button id="btn-reiniciar-nivel" type="button" class="boton-ejecucion-juego">
+                            Reiniciar nivel
+                        </button>
+                        <button id="btn-reiniciar" type="button" class="boton-ejecucion-juego">
+                            Volver al principio
+                        </button>
+                    </div>
+                </section>
+                <section>
+                    <section class="canvas-wrapper">
+                        <section id="pantalla-inicio" class="pantalla-inicio"
+                            aria-labelledby="titulo-inicio">
+                            <h1 id="titulo-inicio">Cyberpunk Peg Solitaire</h1>
+                            <button id="iniciar-juego" type="button" class="boton-primario">
+                                Empezar
+                            </button>
+                    </section>
+                    <section id="pantalla-tipo" class="pantalla-tipo" aria-labelledby="titulo-tipo" hidden>
+                        <h2 id="titulo-tipo">Elegí tu ficha</h2>
+
+                        <div class="opciones-tipo" role="group" aria-label="Tipo de ficha">
+                            <button type="button" class="boton-primario" data-tipo="tipo1" aria-pressed="false">
+                                <img src="img/juego/solitaire/fichas/ficha1.png" alt="">
+                                Azul
+                            </button>
+                            <button type="button" class="boton-primario" data-tipo="tipo2" aria-pressed="false">
+                                <img src="img/juego/solitaire/fichas/ficha2.png" alt="">
+                                Amarilla
+                            </button>
+                        </div>
+
+                        <h3 id="titulo-tiempo">Elegí el tiempo</h3>
+                        <div class="opciones-tiempo" role="group" aria-labelledby="titulo-tiempo">
+                            <button type="button" class="opcion-tiempo" data-minutos="1" aria-pressed="false">1 min</button>
+                            <button type="button" class="opcion-tiempo" data-minutos="3" aria-pressed="false">3 min</button>
+                            <button type="button" class="opcion-tiempo" data-minutos="5" aria-pressed="false">5 min</button>
+                            <button type="button" class="opcion-tiempo" data-minutos="10" aria-pressed="false">10 min</button>
+                        </div>
+
+                        <button id="comenzar-partida" type="button" class="boton-primario" disabled>
+                            Comenzar
+                        </button>
+                    </section>
+                    
+
+                    <canvas id="solitaire-canvas" hidden></canvas>
+
+                    <section id="pantalla-fin" class="pantalla-fin"
+                        aria-live="polite" hidden>
+                        <h2 id="mensaje-fin"></h2>
+                        <p>Reiniciar para volver a jugar</p>
+                        <button id="btn-reiniciar-fin" type="button" class="boton-ejecucion-juego">
+                            Reiniciar
+                        </button>
+                    </section>
+                </section>
               </div>
 
 
@@ -606,6 +669,13 @@
             <p>© 2026 TODO JUEGOS. Todos los derechos reservados</p>
         </div>   
   </footer>
+<script src="js/peg-solitaire/ficha.js"></script>
+<script src="js/peg-solitaire/tablero.js"></script>
+<script src="js/peg-solitaire/vista.js"></script>
+<script src="js/peg-solitaire/vistaInterfaz.js"></script>
+<script src="js/peg-solitaire/juegoController.js"></script>
+<script src="js/peg-solitaire/pegSolitaireController.js"></script>
+<script src="js/peg-solitaire/main.js"></script>
 <script src="js/carrusel.js"></script>
 <script src="js/reacciones.js"></script>
 <script src="js/menu.js"></script>
