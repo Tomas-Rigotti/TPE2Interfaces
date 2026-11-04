@@ -39,7 +39,6 @@
     display: none;
 }
 
-.pantalla-inicio,
 .pantalla-tipo {
     display: flex;
     width: 100%;
@@ -56,18 +55,10 @@
     text-align: center;
 }
 
-.pantalla-inicio h1,
 .pantalla-tipo h2 {
     margin: 0;
     color: #ffffff;
     font-family: var(--font-title);
-}
-
-.pantalla-inicio h1 {
-    font-size: 40px;
-}
-
-.pantalla-tipo h2 {
     font-size: 32px;
 }
 
