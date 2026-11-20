@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
+
+    <title>Cyberpunk Peg Solitaire</title>
+
+    <link rel="stylesheet" href="css\globals.css">
+    <link rel="stylesheet" href="css/juego.css">
+    <link rel="stylesheet" href="css\carrusel.css">
+    <link rel="stylesheet" href="css\flappy/flappy.css">
+  </head>
+
+  <body>
+
+    <header class="nav-bar">
+      <div class="logo-con-menu-y">
+        <div class="iconos">
+          <button class="tabler-icon-menu menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-overlay">
+            <img class="icono-menu" src="img/header/menu-hamburguesa.svg" alt="" />
+          </button>
+          <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+          <a href="home.html">
+            <div class="tabler-icon-home"><img class="icono-home" src="img/header/header-home.svg" alt="Inicio" /></div>
+          </a>
+
+        </div>
+        <div class="logo">
+          <div class="lucide-gamepad"><img class="logo-icono" src="img/header/logo-dibujo.svg" alt="" /></div>
+          <div class="logo-texto">TODO</div>
+          <div class="logo-insignia">JUEGOS</div>
+        </div>
+        <div class="perfil">
+          <button class="perfil-toggle" type="button" aria-label="Abrir menú de perfil" aria-expanded="false" aria-controls="perfil-dropdown">
+            <img class="perfil-avatar" src="img/header/perfil-header.svg" alt="" />
+          </button>
+          <div class="perfil-dropdown" id="perfil-dropdown" hidden>
+            <div class="perfil-opcion">Mis juegos</div>
+            <button class="perfil-cerrar-sesion" type="button">Cerrar sesión</button>
+          </div>
+          <img class="linea-separadora" src="img/header/linea-separadora.svg" alt="" />
+          <img class="perfil-flecha" src="img/header/carrito-simple.svg" alt="" />
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+      <nav class="menu-panel" aria-label="Menú principal">
+        <div class="menu-columna">
+          <a href="home.html">
+            <h1>Home</h1>
+          </a>
+        </div>
+        <div class="menu-columna">
+          <h1>Categorias</h1>
+        </div>
+
+        <div class="menu-columna">
+          <h1>Ofertas</h1>
+        </div>
+
+        <div class="menu-columna">
+          <h1>Mi perfil</h1>
+        </div>
+        <div class="menu-columna">
+          <h1>Seguinos</h1>
+          <div class="menu-social-links">
+            <a href="https://x.com" target="_blank" rel="noopener" aria-label="X">
+              <img src="assets/x.svg" alt="">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+              <img src="assets/instagram.svg" alt="">
+            </a>
+
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+              <img src="assets/facebook.svg" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="menu-columna">
+          <button class="menu-cerrar-sesion" type="button">Cerrar sesión</button>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <div class="contenedor-padding">
+        <!-- ==================== JUEGO ==================== -->
+
+        <section class="juego-seccion">
+
+          <h1 class="titulo-juego">
+            <u>Flappy Ship</u>
+          </h1>
+
+          <div class="breadcrumbs">
+
+            <a href="home.html" class="breadcrumb-inicio">
+              <img src="img/juego/breadcrumbs/breadcrumb-home.svg" alt="Inicio">
+            </a>
+
+            <img
+              class="breadcrumb-flecha"
+              src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+              alt=""
+            >
+
+            <a href="#" class="breadcrumb-item">
+              Categorías
+            </a>
+
+            <img
+              class="breadcrumb-flecha"
+              src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+              alt=""
+            >
+
+            <a href="#" class="breadcrumb-item">
+              Arcade
+            </a>
+
+            <img
+              class="breadcrumb-flecha"
+              src="img/juego/breadcrumbs/breadcrumb-flecha.svg"
+              alt=""
+            >
+
+            <span class="breadcrumb-actual">
+              Flappy Ship
+            </span>
+
+          </div>
+
+
+          <section class="juego-con-ayuda">
+
+            <div class="juego">
+
+              <div class="hud" hidden>
+                <span>Puntaje: <strong id="puntaje">0</strong></span>
+                <span>Vidas: <strong id="vidas">7</strong></span>
+              </div>
+
+              <section class="canvas-wrapper">
+                <div class="escena" id="escena">
+
+                  <!-- 4 capas de parallax -->
+                  <div class="capa capa-cielo"    data-velocidad="8"></div>
+                  <div class="capa capa-lejana"   data-velocidad="20"></div>
+                  <div class="capa capa-media"    data-velocidad="45"></div>
+                  <div class="capa capa-cercana"  data-velocidad="90"></div>
+
+                  <!-- obstáculos, items y piso -->
+                  <div class="tuberias" id="tuberias"></div>
+                  <div class="items" id="items"></div>
+                  <div class="piso" data-velocidad="180"></div>
+
+                  <!-- avatar -->
+                  <div id="nave" class="nave-vuelo"></div>
+
+                  <!-- pantallas -->
+                  <section id="pantalla-inicio" class="pantalla-inicio">
+                    <h1>Flappy Ship</h1>
+                    <button id="mostrar-dificultades" type="button" class="boton-primario">
+                      Empezar
+                    </button>
+                    <p id="estado-carga" class="estado-carga" aria-live="polite"></p>
+                  </section>
+
+                  <section id="pantalla-dificultad" class="pantalla-dificultad" hidden>
+                    <h2>Elegí la dificultad</h2>
+                    <div class="opciones-dificultad">
+                      <button id="iniciar-normal" type="button" class="boton-primario">
+                        <span>Normal</span>
+                        <small>7 vidas · separación estándar</small>
+                      </button>
+                      <button id="iniciar-dificil" type="button" class="boton-primario">
+                        <span>Difícil</span>
+                        <small>4 vidas · tuberías más cercanas</small>
+                      </button>
+                    </div>
+                  </section>
+
+                  <section id="pantalla-fin" class="pantalla-fin" aria-live="polite" hidden>
+                    <h2>Fin del juego</h2>
+                    <p>Puntaje: <strong id="puntaje-final">0</strong></p>
+                    <button id="reiniciar-juego" type="button" class="boton-primario">
+                      Reiniciar
+                    </button>
+                  </section>
+
+                </div>
+              </section>
+            </div>
+
+
+            <aside class="ayuda">
+
+              <div class="ayuda-cabecera">
+                <h2 class="texto-sin-margen">
+                  ¿Cómo jugar?
+                </h2>
+
+                <button
+                  type="button"
+                  class="ayuda-icono"
+                  aria-label="Cerrar ayuda"
+                >
+                  <img
+                    src="img/juego/instrucciones-juego/help.svg"
+                    alt=""
+                  >
+                </button>
+              </div>
+
+              <div class="ayuda-texto">
+
+                <p>
+                  <strong><u>Objetivo:</u> </strong> <br>
+                  Completa la mayor cantidad de saltos sin chocarte contra los obstáculos
+                </p>
+
+                <p>
+                  <u>Mecánica:</u><br>
+                  Apretá la barra espaciadora para saltar y esquivar los obstáculos.
+                </p>
+
+                <p>
+                  <u>Items:</u><br>
+                  Hay items que pueden ayudarte.
+                  Las monedas te suman 3 puntos, los corazones te dan una vida extra, y el orbe aumenta tu velocidad temporalmente.
+                </p>
+
+                <p>
+                  <u>Fin del juego:</u><br>
+                  Cuando no te quedan más vidas.
+                </p>
+
+              </div>
+
+            </aside>
+
+          </section>
+
+
+
+          <!-- Compartir / valoración -->
+
+          <div class="compartir-valoracion">
+
+            <div class="compartir">
+
+              <h4 class="compartir-titulo">
+                Compartir en:
+              </h4>
+
+              <p class="compartir-icono" aria-label="Compartir">
+                <img src="img/juego/compartir/x.svg" alt="">
+              </p>
+
+              <p class="compartir-icono" aria-label="Compartir en redes">
+                <img src="img/juego/compartir/facebook.svg" alt="">
+              </p>
+
+              <p class="compartir-icono" aria-label="Compartir">
+                <img src="img/juego/compartir/mensaje.svg" alt="">
+              </p>
+
+              <p class="compartir-icono" aria-label="Compartir">
+                <img src="img/juego/compartir/email.svg" alt="">
+              </p>
+
+            </div>
+
+
+            <div class="valoracion">
+
+              <h4 class="valoracion-pregunta">
+                ¿Te gusta este juego?
+              </h4>
+
+              <div class="reacciones">
+
+                <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                </button>
+
+                <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ==================== INFORMACIÓN ==================== -->
+
+        <section class="informacion-juego">
+
+          <div class="seccion-cabecera">
+
+            <h2 class="texto-sin-margen">
+              <u>Información del juego</u>
+            </h2>
+
+            <img
+              class="info-icono"
+              src="img/juego/informacion/informacion.svg"
+              alt=""
+            >
+
+          </div>
+
+
+          <p class="descripcion-juego">
+            Flappy Ship es un juego de reflejos e ingenio que te pondrá a prueba. Controla a tu nave y esquiva los obstáculos para lograr la mayor cantidad de saltos posibles. ¡Demostra tus habilidades y competi por el mejor puntaje!
+          </p>
+
+
+          <div class="inspiracion">
+
+
+
+
+            <div class="media-seccion">
+
+              <h3 class="texto-sin-margen">Capturas del juego</h3>
+
+
+              <div class="carrusel">
+
+                <button class="carrusel-anterior" type="button" aria-label="Anterior">
+                  ←
+                </button>
+
+                <div class="carrusel-ventana">
+
+                  <div class="carrusel-contenido">
+                    <img
+                      class="media-imagen"
+                      src="img/flappy/carrusel2.PNG"
+                      alt="Gameplay"
+                    >
+
+                    <img
+                      class="media-imagen"
+                      src="img/flappy/capa-ciudad.png"
+                      alt="Ciudad"
+                    >
+
+                    <img
+                      class="media-imagen"
+                      src="img/flappy/carrusel3.png"
+                      alt="Nave"
+                    >
+
+
+                  </div>
+
+                </div>
+
+                <button class="carrusel-siguiente" type="button" aria-label="Siguiente">
+                  →
+                </button>
+
+              </div>
+
+              <div class="carrusel-indicador" role="img" aria-label="Posición 1 de 7"></div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ==================== COMUNIDAD ==================== -->
+
+        <section class="comunidad">
+
+          <h2 class="comunidad-titulo">
+            <u>Sección de comunidad</u>
+          </h2>
+
+
+          <!-- Publicar comentario -->
+
+          <div class="publicar-comentario">
+
+            <h3 class="subtitulo-comentario">
+              Publicar un comentario
+            </h3>
+
+            <div class="comentario-input">
+
+              <div class="usuario-input">
+
+
+                <img class="avatar"
+                  src="img/juego/comunidad/avatar-placeholder.svg"
+                  alt="Avatar del usuario">
+
+                <div class="input-comentarios">
+                  <span class="comentario-placeholder">
+                    Escribí tu comentario
+                  </span>
+                </div>
+
+              </div>
+
+              <button
+                type="button"
+                class="boton-secundario boton-publicar"
+              >
+                Publicar
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- Comentarios -->
+
+          <div class="comentarios">
+
+            <h3 class="subtitulo-comentario">
+              Comentarios
+            </h3>
+
+
+            <article class="comentario">
+
+              <div class="comentario-usuario">
+
+                <img class="avatar"
+                  src="img/juego/comunidad/avatar-placeholder.svg"
+                  alt="Avatar del usuario">
+
+                <h4>
+                  Usuario1
+                </h4>
+
+              </div>
+
+              <div class="comentario-contenido">
+                <p>
+                  Es un gran juego, muy complicado pero divertido
+                </p>
+              </div>
+
+              <div class="comentario-reacciones">
+
+                <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                </button>
+
+                <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <article class="comentario">
+
+              <div class="comentario-usuario">
+
+                <img class="avatar"
+                  src="img/juego/comunidad/avatar-placeholder.svg"
+                  alt="Avatar del usuario">
+
+                <h4>
+                  Usuario2
+                </h4>
+
+              </div>
+
+              <div class="comentario-contenido">
+                <p>
+                  No me gustó, soy malísimo
+                </p>
+              </div>
+
+              <div class="comentario-reacciones">
+
+                <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                </button>
+
+                <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <article class="comentario">
+
+              <div class="comentario-usuario">
+
+                <img class="avatar"
+                  src="img/juego/comunidad/avatar-placeholder.svg"
+                  alt="Avatar del usuario">
+
+                <h4>
+                  Usuario3
+                </h4>
+
+              </div>
+
+              <div class="comentario-contenido">
+                <p>
+                  Muy bueno
+                </p>
+              </div>
+
+              <div class="comentario-reacciones">
+
+                <button type="button" class="boton-reaccion-like" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/like.svg" alt="Me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon.svg" alt="Me gusta seleccionado">
+                </button>
+
+                <button type="button" class="boton-reaccion-dislike" aria-pressed="false">
+                  <img class="icon--default" src="img/juego/like-dislike/dislike.svg" alt="No me gusta">
+                  <img class="icon--hover" src="img/juego/like-dislike/corazon-dislike.svg" alt="No me gusta seleccionado">
+                </button>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </section>
+
+
+      </div>
+
+    </main>
+
+    <footer>
+      <div class="footer-container">
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Destacados</a></li>
+            <li><a href="#">Ofertas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Contacto</h4>
+          <ul class="footer-links">
+            <li><a href="#">Nuestras redes</a></li>
+            <li><a href="#">Envianos tus sugerencias</a></li>
+            <div class="social-icons">
+              <a href="https://instagram.com" class="social-link" target="_blank" rel="noopener">
+                <img src="assets/instagram.svg" alt="Instagram" class="social-icon-img">
+              </a>
+              <a href="https://x.com/" class="social-link" target="_blank" rel="noopener">
+                <img src="assets/x.svg" alt="X/Twitter" class="social-icon-img">
+              </a>
+            </div>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Soporte</h4>
+          <ul class="footer-links">
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Sobre nosotros</a></li>
+            <li><a href="#">Código de conducta</a></li>
+            <li><a href="#">Políticas de privacidad</a></li>
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright</p>
+        <p>© 2026 TODO JUEGOS. Todos los derechos reservados</p>
+      </div>
+    </footer>
+
+  <script src="js/flappy/flappy.js"></script>
+  <script src="js/flappy/tuberias.js"></script>
+  <script src="js/flappy/bonos.js"></script>
+  <script src="js/flappy/recursos.js"></script>
+
+  <script src="js/carrusel.js"></script>
+  <script src="js/reacciones.js"></script>
+  <script src="js/menu.js"></script>
+  </body>
+</html>
