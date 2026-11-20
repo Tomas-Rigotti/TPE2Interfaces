@@ -193,6 +193,11 @@ function actualizar(dt) {
   nave.vy += GRAVEDAD * dt;
   nave.y += nave.vy * dt;
 
+  if (nave.y < 0) {
+    nave.y = 0;
+    nave.vy = 0;
+  }
+
   if (nave.y >= SUELO - ALTO_NAVE) {
     nave.y = SUELO - ALTO_NAVE;
     nave.vy = 0;
