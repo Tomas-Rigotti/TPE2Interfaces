@@ -81,6 +81,7 @@ const SUELO = 405 - ALTO_PISO + 22;
 
 let jugando = false;
 let saltoPresionado = false;
+let tocoPiso = false;
 let vidas = 7;
 let puntaje = 0;
 let ultimoFrame = 0;
@@ -140,8 +141,9 @@ function iniciarJuego(dificultad) {
 
   puntaje = 0;
   nave.x = 90;
-  nave.y = 240;
+  nave.y = 100;
   nave.vy = 0;
+  tocoPiso = false;
 
   //Inicializo monedas
   contenedorItems.innerHTML = '';
@@ -180,6 +182,7 @@ function procesarEntrada() {
 
   nave.vy = IMPULSO;
   saltoPresionado = false;
+  tocoPiso = false;
 
   nave.El.classList.remove('nave-salto');
   void nave.El.offsetWidth;
@@ -193,6 +196,11 @@ function actualizar(dt) {
   if (nave.y >= SUELO - ALTO_NAVE) {
     nave.y = SUELO - ALTO_NAVE;
     nave.vy = 0;
+
+    if (!tocoPiso) {
+      tocoPiso = true;
+      chocar();
+    }
   }
 
   actualizarEfectoTurbo(dt);

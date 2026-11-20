@@ -143,8 +143,14 @@
             <div class="juego">
 
               <div class="hud" hidden>
-                <span>Puntaje: <strong id="puntaje">0</strong></span>
-                <span>Vidas: <strong id="vidas">7</strong></span>
+                <div class="hud-tiempo">
+                  <span class="hud-tiempo-etiqueta">Puntaje:</span>
+                  <span id="puntaje">0</span>
+                </div>
+                <div class="hud-tiempo">
+                  <span class="hud-tiempo-etiqueta">Vidas:</span>
+                  <span id="vidas">7</span>
+                </div>
               </div>
 
               <section class="canvas-wrapper">
@@ -229,6 +235,7 @@
                 <p>
                   <u>Mecánica:</u><br>
                   Apretá la barra espaciadora para saltar y esquivar los obstáculos.
+                  ¡Cuidado: Tocar el piso te restará una vida!
                 </p>
 
                 <p>
