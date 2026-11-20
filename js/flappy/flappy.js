@@ -82,6 +82,7 @@ const SUELO = 405 - ALTO_PISO + 22;
 let jugando = false;
 let saltoPresionado = false;
 let tocoPiso = false;
+let tocoTecho = false;
 let vidas = 7;
 let puntaje = 0;
 let ultimoFrame = 0;
@@ -144,6 +145,7 @@ function iniciarJuego(dificultad) {
   nave.y = 100;
   nave.vy = 0;
   tocoPiso = false;
+  tocoTecho = false;
 
   //Inicializo monedas
   contenedorItems.innerHTML = '';
@@ -196,6 +198,13 @@ function actualizar(dt) {
   if (nave.y < 0) {
     nave.y = 0;
     nave.vy = 0;
+
+    if (!tocoTecho) {
+      tocoTecho = true;
+      chocar();
+    }
+  } else if (tocoTecho && nave.y > 0) {
+    tocoTecho = false;
   }
 
   if (nave.y >= SUELO - ALTO_NAVE) {
