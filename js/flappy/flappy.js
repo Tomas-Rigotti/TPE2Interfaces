@@ -45,33 +45,48 @@ const capas = Array.from(document.querySelectorAll('.capa, .piso')).map((el) => 
   offset: 0
 }));
 
+//Para sistema de records
+const recordFlappyEl = document.getElementById('record-flappy');
+const recordFinalEl = document.getElementById('record-final');
+const nuevoRecordEl = document.getElementById('nuevo-record');
+//let dificultadActual = 'normal';
+
 const HITBOX_NAVE = { x: 75, y: 23, ancho: 40, alto: 14 };
 const ALTO_NAVE = 64;
 const ANCHO_ESCENA = 810;
 const ALTO_ESCENA = 405;
+//Las tuberias se desplazan a la izquierda a 180px por segundo
 const VEL_TUBERIA = 180;
 const ANCHO_TUBO = 80;
 
-const HUECO_INICIAL = 140;
-const HUECO_MINIMO = 100;
-
-//Cuanto se achica el hueco por nivel
+//Cuanto se achica el hueco por nivel, y el limite 
+const HUECO_INICIAL = 150;
+const HUECO_MINIMO = 110;
 const HUECO_PASO = 8;
+//Diferencia de altura entre los huecos de las tuberias 
+const DESPLAZAMIENTO_MAXIMO_HUECO = 90;
+
+//Separacion horizontal de las tuberias
 const SEPARACION_INICIAL = 340;
-const SEPARACION_MINIMA = 200;
+const SEPARACION_MINIMA = 240;
 const SEPARACION_PASO = 20;
-const VARIACION_SEPARACION = 0.4;
+//Para que las tuberias tengan una separacion random incluso en el mismo nivel
+const VARIACION_SEPARACION = 0.3;
 //Cambios segun el nivel de dificultad
 const CONFIGURACION_DIFICULTAD = {
   normal: { vidas: 7, separacionDificultad: 1 },
   dificil: { vidas: 4, separacionDificultad: 0.8 }
 };
+let configuracionActual = CONFIGURACION_DIFICULTAD.normal;
 
 //Duracion en segundos de los niveles (a medida que pasan los niveles hay menos espacio en el hueco y menos
 //espacio horizontal entre tubos)
 const DURACION_NIVEL = 15;
 const NIVEL_MAXIMO = 8;
+
+//Distancia minima entre el comienzo o el final del hueco y los bordes del area jugable
 const MARGEN_TUBO = 20;
+
 
 const GRAVEDAD = 1400;
 const IMPULSO = -430;
@@ -114,6 +129,7 @@ function velocidadActual() {
   return VEL_TUBERIA * multiplicadorVelocidad;
 }
 
+//Mantener entre rangos usables
 function limitar(valor, min, max) {
   return Math.max(min, Math.min(max, valor));
 }
@@ -121,6 +137,11 @@ function limitar(valor, min, max) {
 function actualizarHud() {
   puntajeEl.textContent = puntaje;
   vidasEl.textContent = vidas;
+
+  if (recordFlappyEl) {
+    const dificultad = obtenerClaveDificultadActual();
+    recordFlappyEl.textContent = obtenerRecordFlappy(dificultad);
+  }
 }
 
 function mostrarOpcionesDificultad() {
@@ -128,10 +149,28 @@ function mostrarOpcionesDificultad() {
   pantallaDificultad.hidden = false;
 }
 
+function obtenerClaveDificultadActual() {
+  const entrada = Object.entries(CONFIGURACION_DIFICULTAD).find(
+    ([, configuracion]) => configuracion === configuracionActual
+  );
+
+  if (!entrada) {
+    throw new Error('No se encontró la configuración de dificultad activa.');
+  }
+
+  return entrada[0];
+}
+
 function iniciarJuego(dificultad) {
   if (jugando) return;
 
   const configuracion = CONFIGURACION_DIFICULTAD[dificultad];
+  
+  if (!configuracion) {
+    throw new Error(`Dificultad desconocida: ${dificultad}`);
+  }
+
+  configuracionActual = configuracion;
   vidasMaximas = 15;
   separacionDificultad = configuracion.separacionDificultad;
   jugando = true;
@@ -187,14 +226,18 @@ function procesarEntrada() {
   tocoPiso = false;
 
   nave.El.classList.remove('nave-salto');
+  //Recalcula el tamaño del elemento para reiniciar la animacion
   void nave.El.offsetWidth;
   nave.El.classList.add('nave-salto');
 }
 
 function actualizar(dt) {
+  //Aplico la gravedad a la velocidad vertical de la nave
   nave.vy += GRAVEDAD * dt;
+  //Actualizo la posicion segun la vy y el tiempo transcurrido
   nave.y += nave.vy * dt;
 
+  //Si supera el limite superior del escenario, corrijo la posicion y saco una vida
   if (nave.y < 0) {
     nave.y = 0;
     nave.vy = 0;
@@ -203,10 +246,13 @@ function actualizar(dt) {
       tocoTecho = true;
       chocar();
     }
+    //Si la nave dejo de tocar el techo, restablezco el indicador
   } else if (tocoTecho && nave.y > 0) {
     tocoTecho = false;
   }
 
+  //Si la nave toca el piso, corrijo la posicion y saco una vida
+  //No uso else if, porque procesarEntrada() ya setea tocoPiso en False
   if (nave.y >= SUELO - ALTO_NAVE) {
     nave.y = SUELO - ALTO_NAVE;
     nave.vy = 0;
@@ -259,13 +305,16 @@ function dibujar() {
 }
 
 function loop(ts) {
+  //Calculo el tiempo transcurrido desde el ultimo frame en segundos, limitado a un maximo de 0.05 segundos
   const dt = limitar((ts - ultimoFrame) / 1000, 0, 0.05);
+  //Guarda el instante actual para calcular el siguiente frame
   ultimoFrame = ts;
 
   procesarEntrada();
   actualizar(dt);
   dibujar();
 
+  //Si sigue el juego, pido el proximo frame
   if (jugando) requestAnimationFrame(loop);
 }
 
@@ -313,7 +362,19 @@ function chocar() {
 
   if (vidas === 0) {
     jugando = false;
+    const dificultad = obtenerClaveDificultadActual();
+    const esNuevoRecord = registrarRecordFlappy(dificultad, puntaje);
+    
     puntajeFinalEl.textContent = puntaje;
+
+    if (recordFinalEl) {
+      recordFinalEl.textContent = obtenerRecordFlappy(dificultad);
+    }
+
+    if (nuevoRecordEl) {
+      nuevoRecordEl.hidden = !esNuevoRecord;
+    }
+    
     hudEl.hidden = true;
     pantallaFin.hidden = false;
   }

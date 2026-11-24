@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
 
-    <title>Cyberpunk Peg Solitaire</title>
+    <title>Flappy Ship</title>
 
     <link rel="stylesheet" href="css\globals.css">
     <link rel="stylesheet" href="css/juego.css">
@@ -151,6 +151,11 @@
                   <span class="hud-tiempo-etiqueta">Vidas:</span>
                   <span id="vidas">7</span>
                 </div>
+
+                <div class="hud-tiempo">
+                  <span class="hud-tiempo-etiqueta">Récord:</span>
+                  <span id="record-flappy">0</span>
+                </div>
               </div>
 
               <section class="canvas-wrapper">
@@ -196,6 +201,8 @@
                   <section id="pantalla-fin" class="pantalla-fin" aria-live="polite" hidden>
                     <h2>Fin del juego</h2>
                     <p>Puntaje: <strong id="puntaje-final">0</strong></p>
+                    <p>Récord: <strong id="record-final">0</strong></p>
+                    <p id="nuevo-record" hidden>¡Nuevo récord!</p>
                     <button id="reiniciar-juego" type="button" class="boton-primario">
                       Reiniciar
                     </button>
@@ -621,6 +628,7 @@
       </div>
     </footer>
 
+  <script src="js/flappy/records.js"></script>
   <script src="js/flappy/flappy.js"></script>
   <script src="js/flappy/tuberias.js"></script>
   <script src="js/flappy/bonos.js"></script>
