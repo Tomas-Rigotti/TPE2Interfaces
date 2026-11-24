@@ -75,7 +75,6 @@
     height: 64px;
     background-position: -0px -0px;
     animation: saltoAnim 0.4s steps(4) forwards;
-    /*animation: saltoAnim 0.35s steps(1) forwards;*/
 }
 
 @keyframes saltoAnim {
@@ -91,8 +90,6 @@
     height: 64px;
     background-position: -0px -0px;
     animation: choqueAnim .7s steps(4) forwards;
-    /*animation: choqueAnim 0.7s steps(4) infinite;*/
-    /*animation: saltoAnim 0.35s steps(1) forwards;*/
 }
 
 @keyframes choqueAnim {
@@ -143,7 +140,7 @@
 
 .capa {
   inset: 0;
-  background-size: 810px 405px;   /* 1:1 cuando regeneres las imágenes a ese tamaño */
+  background-size: 810px 405px;
 }
 
 
